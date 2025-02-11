@@ -32,7 +32,7 @@ export default function Navbar({ backgroundColor }) {
             <li><a href="/contact" className="hover:text-blue-500">Contact Us</a></li>
           </ul>
           <a
-            href="#"
+            href="login"
             className="ml-6 px-5 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition"
           >
             LOGIN
@@ -73,7 +73,7 @@ export default function Navbar({ backgroundColor }) {
                 </li>
                 <hr></hr>
                 <li className="nav-item">
-                    <a href="/login" className="block w-full px-4 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">Login</a>
+                    <a href="login" className="block w-full px-4 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">Login</a>
                 </li>
               </ul>
             </nav>

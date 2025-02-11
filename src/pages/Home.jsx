@@ -13,17 +13,17 @@ function Home() {
                 <span className='bg-sky-600 text-white px-3 py-1 rounded-full mr-3'>New!</span>Membangun inovasi terbaru
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-3 ml-6">Maju bersama kami SMKN 1 KRAKSAAN</h1>
-            <p className="text-lg text-gray-600 mb-10 ml-6">We're a top-notch web design and development team helping business to craft the meaningful
-            <span className='block whitespace-pre-line'>and interactive product experiences.</span></p>
+            <p className="text-lg text-gray-600 mb-10 ml-6">Kami membuat website yang membantu anda menciptakan pengalaman Pkl yang bermakna dan interaktif
+            <span className='block whitespace-pre-line'>semasa sekolah.</span></p>
             <div className="flex space-x-4 ml-6">
-                <a href="#" className="bg-black text-white px-6 py-3 rounded-md flex items-center space-x-2 hover:bg-gray-800">
+                <a href="register" className="bg-black text-white px-6 py-3 rounded-md flex items-center space-x-2 hover:bg-gray-800">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                       <rect width="24" height="24" fill="none" />
                       <path fill="currentColor" d="M11 16.175V5q0-.425.288-.712T12 4t.713.288T13 5v11.175l4.9-4.9q.3-.3.7-.288t.7.313q.275.3.287.7t-.287.7l-6.6 6.6q-.15.15-.325.213t-.375.062t-.375-.062t-.325-.213l-6.6-6.6q-.275-.275-.275-.687T4.7 11.3q.3-.3.713-.3t.712.3z" />
                     </svg>
                     <span>Bergabung</span>
                 </a>
-                <a href="/register" className="bg-white text-gray-800 border border-gray-800 px-6 py-3 rounded-md hover:bg-gray-100">About Us</a>
+                <a href="about" className="bg-white text-gray-800 border border-gray-800 px-6 py-3 rounded-md hover:bg-gray-100">About Us</a>
             </div>
         </div>
       </div>

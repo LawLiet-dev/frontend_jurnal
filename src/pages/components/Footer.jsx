@@ -43,11 +43,6 @@ export default function Footer() {
                   Contact Us
                 </a>
               </li>
-              <li>
-                <a href="#" className="inline-block text-base hover:text-blue-500 mb-2">
-                  Blog
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -56,7 +51,7 @@ export default function Footer() {
             <p className="mb-2 text-xl font-bold text-slate-500">Get in touch</p>
             <p className="mb-2">
               <a href="mailto:hello@xprompt.com" className="text-gray-600 hover:underline">
-                hello@xprompt.com
+                smk@gmail.com
               </a>
             </p>
             <div className="flex justify-center space-x-4 mr-57">

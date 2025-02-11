@@ -1,121 +1,176 @@
-import React from 'react'
-import HeaderStudent from '../components/HeaderStudent'
+//import useState and useEffect
+import { useEffect } from 'react';
+import HeaderStudent from "./components/HeaderStudent";
+import Notification from "./components/Notification";
 
 function Student() {
   return (
     <div>
-    <HeaderStudent />
+      <HeaderStudent />
+      <Notification />
 
-    <section className="relative overflow-hidden mt-20">
-  <div className="container">
-    <div className="grid grid-cols-12 gap-6 mt-2">
-      <div className="lg:col-span-5 col-span-12">
-        <div className="bg-white rounded border border-gray-300 shadow-lg">
-          <div className="p-6">
-            <div className="flex">
-              <div className="grow">
-                <div className="flex">
-                  <img 
-                    src="/assets/images/avatar.png" 
-                    className="img-fluid w-12 h-12 rounded me-3" 
-                    alt="Profile" 
-                  />
-                  <div className="grow">
-                    <h4 className="text-lg text-default-800 mb-1 mt-0 font-semibold">Student</h4>
-                    <p className="text-default-400 pb-0 text-sm mb-4 font-medium">User</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex gap-4 mb-2 flex-wrap py-4 border-b">
-              <a href="#" className="flex gap-0.5 text-default-400 text-sm">
-                <i className="i-tabler-mail size-5 me-2"></i>
-                farel@gmail.com
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-    </section>
-
-    <section className="relative overflow-hidden">
-  <div className="container">
-    <div className="flex items-center justify-between my-6">
+      {/* <div className="bg-gray-100">
+  <div className="container mx-auto p-4">
+   <div className="flex flex-col lg:flex-row gap-4">
+    <div className="bg-white p-6 rounded-lg shadow-lg flex-1">
+     <div className="flex justify-between items-center mb-4">
       <div>
-        <h4 className="text-base text-default-800">Pembimbing dan Dudi</h4>
+       <h1 className="text-xl font-semibold">
+        Journal Saya
+       </h1>
+       <p className="text-sm text-gray-600">
+        Pembimbing: Anda belum memilih pembimbing
+        <a className="text-blue-500" href="#">
+         Pilih
+        </a>
+       </p>
       </div>
+      <div>
+       <select className="border border-gray-300 rounded-lg p-2">
+        <option>
+         December 2024
+        </option>
+        <option>
+         January 2025
+        </option>
+        <option>
+         February 2025
+        </option>
+        <option>
+         March 2025
+        </option>
+        <option>
+         April 2025
+        </option>
+       </select>
+      </div>
+     </div>
+     <table className="w-full text-left">
+      <thead>
+       <tr className="border-b">
+        <th className="py-2">
+         Image
+        </th>
+        <th className="py-2">
+         Deskripsi
+        </th>
+        <th className="py-2">
+         Tanggal
+        </th>
+        <th className="py-2">
+         Aksi
+        </th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr className="border-b">
+        <td className="py-2">
+         <img alt="Image description" className="w-20 h-20 object-cover" height="100" src="https://storage.googleapis.com/a1aa/image/buw9VOufM2rjZjRB2Fg0CdFlosI9GvWWRjkijLHFFJ4.jpg" width="100"/>
+        </td>
+        <td className="py-2">
+         Lorem ipsum generator,...
+        </td>
+        <td className="py-2 text-blue-500">
+         01 Januari 2025
+        </td>
+        <td className="py-2">
+         <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+          Detail
+          <i className="fas fa-chevron-right">
+          </i>
+         </button>
+        </td>
+       </tr>
+       <tr className="border-b">
+        <td className="py-2">
+         <img alt="Image description" className="w-20 h-20 object-cover" height="100" src="https://storage.googleapis.com/a1aa/image/buw9VOufM2rjZjRB2Fg0CdFlosI9GvWWRjkijLHFFJ4.jpg" width="100"/>
+        </td>
+        <td className="py-2">
+         Lorem ipsum generator,...
+        </td>
+        <td className="py-2 text-blue-500">
+         01 Januari 2025
+        </td>
+        <td className="py-2">
+         <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+          Detail
+          <i className="fas fa-chevron-right">
+          </i>
+         </button>
+        </td>
+       </tr>
+       <tr className="border-b">
+        <td className="py-2">
+         <img alt="Image description" className="w-20 h-20 object-cover" height="100" src="https://storage.googleapis.com/a1aa/image/buw9VOufM2rjZjRB2Fg0CdFlosI9GvWWRjkijLHFFJ4.jpg" width="100"/>
+        </td>
+        <td className="py-2">
+         Lorem ipsum generator,...
+        </td>
+        <td className="py-2 text-blue-500">
+         01 Januari 2025
+        </td>
+        <td className="py-2">
+         <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+          Detail
+          <i className="fas fa-chevron-right">
+          </i>
+         </button>
+        </td>
+       </tr>
+       <tr className="border-b">
+        <td className="py-2">
+         <img alt="Image description" className="w-20 h-20 object-cover" height="100" src="https://storage.googleapis.com/a1aa/image/buw9VOufM2rjZjRB2Fg0CdFlosI9GvWWRjkijLHFFJ4.jpg" width="100"/>
+        </td>
+        <td className="py-2">
+         Lorem ipsum generator,...
+        </td>
+        <td className="py-2 text-blue-500">
+         01 Januari 2025
+        </td>
+        <td className="py-2">
+         <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+          Detail
+          <i className="fas fa-chevron-right">
+          </i>
+         </button>
+        </td>
+       </tr>
+      </tbody>
+     </table>
     </div>
-
-    <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 my-3">
-      
-      {/* Project 1 */}
-      <div className="bg-white rounded border border-gray-300 shadow-lg">
-        <div className="p-6">
-          <div className="mt-3">
-            <h4 className="mt-0 mb-1">
-              <a className="text-lg text-default-600 hover:text-primary" href="#">Pak Agus</a>
-            </h4>
-            <span className="inline-flex items-center gap-1.5 py-1 px-2 rounded-md text-xs font-semibold bg-primary/10 text-primary">Guru</span>
-          </div>
-
-          <div className="flex -space-x-2 mt-3">
-            <img 
-              className="inline-block h-8 w-8 rounded-full border-2 border-white dark:border-default-800" 
-              src="assets/images/avatar.png" 
-              alt="Image Description" 
-            />
-          </div>
-        </div>
+    <div className="bg-blue-500 p-6 rounded-lg shadow-lg w-full lg:w-1/3">
+     <h2 className="text-white text-lg font-semibold mb-4">
+      Statistik Jurnal
+     </h2>
+     <div className="flex justify-center mb-4">
+      <img alt="Statistik Jurnal Logo" className="w-60 h-60 object-cover" height="150" src="/assets/images/smk.png" width="150"/>
+     </div>
+     <div className="bg-white p-20 rounded-lg mt-10">
+      <div className="flex justify-between items-center mb-2">
+       <span className="text-gray-700">
+        Mengisi Journal
+       </span>
+       <span className="text-blue-500">
+        5X
+       </span>
       </div>
-
-      {/* Project 2 */}
-      <div className="bg-white rounded border border-gray-300 shadow-lg">
-        <div className="p-6">
-          <div className="mt-3">
-            <h4 className="mt-0 mb-1">
-              <a className="text-lg text-default-600 hover:text-primary" href="#">Pak B</a>
-            </h4>
-            <span className="inline-flex items-center gap-1.5 py-1 px-2 rounded-md text-xs font-semibold bg-primary/10 text-primary">Dudi</span>
-          </div>
-
-          <div className="flex -space-x-2 mt-3">
-            <img 
-              className="inline-block h-8 w-8 rounded-full border-2 border-white dark:border-default-800" 
-              src="assets/images/avatar.png" 
-              alt="Image Description" 
-            />
-          </div>
-        </div>
+      <div className="flex justify-between items-center">
+       <span className="text-gray-700">
+        Tidak mengisi Journal
+       </span>
+       <span className="text-blue-500">
+        10X
+       </span>
       </div>
-
-      {/* Project 3 */}
-      <div className="bg-white rounded border border-gray-300 shadow-lg">
-        <div className="p-6">
-          <div className="mt-3">
-            <h4 className="mt-0 mb-1">
-              <a className="text-lg text-default-600 hover:text-primary" href="#">Pak C</a>
-            </h4>
-            <span className="inline-flex items-center gap-1.5 py-1 px-2 rounded-md text-xs font-semibold bg-primary/10 text-primary">Guru</span>
-          </div>
-          <div className="flex -space-x-2 mt-3">
-            <img 
-              className="inline-block h-8 w-8 rounded-full border-2 border-white dark:border-default-800" 
-              src="assets/images/avatar.png" 
-              alt="Image Description" 
-            />
-          </div>
-        </div>
-      </div>
-
+     </div>
     </div>
+   </div>
   </div>
-    </section>
+      </div> */}
+
 
     </div>
-  )
+  );
 }
 
-export default Student
+export default Student;

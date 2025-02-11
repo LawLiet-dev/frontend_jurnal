@@ -7,22 +7,22 @@ export default function Contact() {
     <>
     <div style={{ backgroundColor: "#fff" }}>
       <Nav style={{ backgroundColor: "#fff" }}/>
-      <div class="text-center py-20 relative mx-auto mt-20">
-        <h1 class="text-4xl font-bold text-gray-800">
+      <div className="text-center py-20 relative mx-auto mt-20">
+        <h1 className="text-4xl font-bold text-gray-800">
           Contact Us
         </h1>
-        <p class="text-lg text-gray-600 mt-2">
+        <p className="text-lg text-gray-600 mt-2">
           Hubungi kami
         </p>
       </div>
     </div>
-    <div class="container mx-auto p-6 mt-20">
+    <div className="container mx-auto p-6 mt-20">
       {/* <!-- Desktop & Tablet --> */}
       <div className="hidden md:block">
-        <h2 class="text-2xl font-bold mb-4 ml-0 lg:ml-45" style={{ color:"#64748B" }}>
+        <h2 className="text-2xl font-bold mb-4 ml-0 lg:ml-45 xl:ml-55" style={{ color:"#64748B" }}>
           Hubungi Kami
         </h2>
-        <p class="ml-0 lg:ml-45">
+        <p className="ml-0 lg:ml-45 xl:ml-55">
           Silahkan isi formulir berikut, dan kami akan menghubungi 
           <span className='block whitespace-pre-line'>anda kembali.</span>
         </p>
@@ -84,37 +84,37 @@ export default function Contact() {
           </div>
         </div>
       </div>
-      <div class="flex flex-col md:flex-row space-y-6 md:space-x-12 mt-20 justify-center gap-10">
-          <div class="flex items-center">
-            <div class="w-[48px] h-[48px] bg-blue-100 rounded-lg">
-              <img src="/assets/images/icons/inbox.png" alt="inbox" class='w-[35px] h-[35px] mx-auto my-2'/>
+      <div className="flex flex-col md:flex-row space-y-6 md:space-x-12 mt-20 justify-center gap-10 xl:gap-30">
+          <div className="flex items-center">
+            <div className="w-[48px] h-[48px] bg-blue-100 rounded-lg">
+              <img src="/assets/images/icons/inbox.png" alt="inbox" className='w-[35px] h-[35px] mx-auto my-2'/>
             </div>
-            <div class='ml-2'>
-                <div class="font-semibold">Email</div>
+            <div className='ml-2'>
+                <div className="font-semibold">Email</div>
                 <div>admin@smkn1kraksaan.sch.id</div>
             </div>
           </div>
-          <div class="flex items-center">
-            <div class="w-[48px] h-[48px] bg-orange-100 rounded-lg">
-                <img src="/assets/images/icons/call.png" alt="call" class='w-[35px] h-[35px] mx-auto my-2'/>
+          <div className="flex items-center">
+            <div className="w-[48px] h-[48px] bg-orange-100 rounded-lg">
+                <img src="/assets/images/icons/call.png" alt="call" className='w-[35px] h-[35px] mx-auto my-2'/>
               </div>
-              <div class='ml-2'>
-                  <div class="font-semibold">Phone</div>
+              <div className='ml-2'>
+                  <div className="font-semibold">Phone</div>
                   <div>0335841306</div>
               </div>
           </div>
-          <div class="flex items-center">
-          <div class="w-[48px] h-[48px] bg-teal-100 rounded-lg">
-                <img src="/assets/images/icons/locations.png" alt="locations" class='w-[35px] h-[35px] mx-auto my-2'/>
+          <div className="flex items-center">
+          <div className="w-[48px] h-[48px] bg-teal-100 rounded-lg">
+                <img src="/assets/images/icons/locations.png" alt="locations" className='w-[35px] h-[35px] mx-auto my-2'/>
               </div>
-              <div class='ml-2'>
-                  <div class="font-semibold">Addres</div>
+              <div className='ml-2'>
+                  <div className="font-semibold">Addres</div>
                   <div>Jawa timur 67282</div>
               </div>
           </div>
       </div>
     </div>
-        {/* <div class="w-full overflow-hidden leading-none">
+        {/* <div className="w-full overflow-hidden leading-none">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#F1F5F9" fill-opacity="1" d="M0,192L120,176C240,160,480,128,720,128C960,128,1200,160,1320,176L1440,192L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
         </div> */}
       <Footer />
