@@ -109,16 +109,7 @@ function Home() {
             without having any design experience.
           </p>
         </div>
-
-        {/* <div className="col-span-full">
-          <div className="flex justify-start items-center gap-6 overflow-x-scroll hide-scrollbar md:overflow-x-auto md:justify-center">
-            <img src="/assets/images/icons/amazon2.png" alt="Amazon logo" className="h-10 mx-4 my-3 grayscale opacity-50 transition duration-500 hover:grayscale-0 hover:opacity-100" />
-            <img src="/assets/images/icons/google.png" alt="Google logo" className="h-25 mx-4 my-3 grayscale opacity-50 transition duration-500 hover:grayscale-0 hover:opacity-100" />
-            <img src="/assets/images/icons/paypal.png" alt="PayPal logo" className="h-10 mx-4 my-3 grayscale opacity-50 transition duration-500 hover:grayscale-0 hover:opacity-100" />
-            <img src="/assets/images/icons/spotify.png" alt="Spotify logo" className="h-10 mx-4 my-3 grayscale opacity-50 transition duration-500 hover:grayscale-0 hover:opacity-100" />
-            <img src="/assets/images/icons/shopify2.png" alt="Shopify logo" className="h-25 mx-4 my-3 grayscale opacity-50 transition duration-500 hover:grayscale-0 hover:opacity-100" />
-          </div>
-        </div> */}
+        
         <div className="col-span-full">
           <div className="flex flex-wrap justify-center items-center gap-6">
             <img src="/assets/images/icons/amazon2.png" alt="Amazon logo" className="h-10 mx-4 my-3 grayscale opacity-50 transition duration-500 hover:grayscale-0 hover:opacity-100" />
