@@ -1,9 +1,13 @@
 import React from 'react'
 import Account from './account/setting/Account'
 import Password from './account/setting/Password'
-import Login from './account/Login'
+// import Login from './account/Login'
+import Login from './auth/login'
 import Register from './account/Register'
-import Landing from './landing/Landing'
+// import Landing from './landing/Landing'
+import Home from './pages/Home'
+import Contact from './pages/Contact'
+import About from './pages/About'
 import Teacher from './teacher/Teacher'
 import Pembimbing from './student/Pembimbing'
 import Journal from './teacher/Journal'
@@ -22,7 +26,9 @@ function App() {
     <div>
      <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Landing/>}/>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/contact' element={<Contact/>}/>
+        <Route path='/about' element={<About/>}/>
         <Route path='/akun' element={<Account/>}/>
         <Route path='/password' element={<Password/>}/>
         <Route path='/register' element={<Register/>}/>

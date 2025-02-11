@@ -1,5 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+// import tailwindScrollbarHide from "tailwind-scrollbar-hide";
+// import scrollbarHide from 'tailwind-scrollbar-hide'
+// tailwindScrollbarHide(), [scrollbarHide]
+// import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
