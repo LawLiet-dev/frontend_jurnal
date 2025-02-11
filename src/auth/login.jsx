@@ -14,22 +14,27 @@ export default function login() {
                   </h1>
               </div>
               <h2 className="text-2xl font-medium ml-1">Login Your Account</h2>
-              <p className="text-gray-600 mb-6 text-center">Enter your email address and password to access journal.</p>
+              <p className="text-gray-600 mb-6 md:ml-1">Enter your email address and password <span className='hidden md:block md:whitespace-pre-line'></span>to access journal.</p>
               <form>
-                  <input type="email" placeholder="Your Email" className="w-full p-3 mb-4 border border-gray-300 rounded" />
+                <div>
+                    <label className="block text-gray-700 font-medium">Email *</label>
+                    <input type="email" placeholder="Your Email" className="w-full p-3 mb-4 border border-gray-300 rounded" />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-medium">Password *</label>
                   <input type="password" placeholder="Enter your password" className="w-full p-3 mb-4 border border-gray-300 rounded" />
-                  <a href="#" className="text-blue-500 text-sm mb-4 inline-block">Lupa Password?</a>
+                </div>
+                  <a href="/reset" className="text-blue-500 text-sm mb-4 inline-block">Lupa Password?</a>
                   <button className="w-full bg-blue-500 text-white p-3 rounded hover:bg-blue-600">Login</button>
               </form>
           </div>
-          <div className="md:w-1/2 flex justify-center items-center">
-              <img src="/assets/images/smk.png" alt="School Emblem" className="w-90 h-90 mb-3" />
+          <div className="md:w-1/2 flex justify-center items-center hidden md:block">
+              <img src="/assets/images/icons/smk.png" alt="School Emblem" className="w-90 h-120 mb-3" />
           </div>
       </div>
 
-      {/* <!-- Teks Registrasi di Bawah Card --> */}
       <div className="text-center text-sm mt-4">
-          Apakah anda belum mempunyai akun? <a href="#" className="text-blue-500">Registrasi</a>
+          Apakah anda belum mempunyai akun? <a href="/register" className="text-blue-500">Registrasi</a>
       </div>
   </div>
     </>

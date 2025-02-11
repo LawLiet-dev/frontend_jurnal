@@ -23,7 +23,7 @@ function Home() {
                     </svg>
                     <span>Bergabung</span>
                 </a>
-                <a href="#" className="bg-white text-gray-800 border border-gray-800 px-6 py-3 rounded-md hover:bg-gray-100">About Us</a>
+                <a href="/register" className="bg-white text-gray-800 border border-gray-800 px-6 py-3 rounded-md hover:bg-gray-100">About Us</a>
             </div>
         </div>
       </div>

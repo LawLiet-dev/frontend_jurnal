@@ -73,7 +73,7 @@ export default function Navbar({ backgroundColor }) {
                 </li>
                 <hr></hr>
                 <li className="nav-item">
-                    <a href="#" className="block w-full px-4 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">Login</a>
+                    <a href="/login" className="block w-full px-4 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">Login</a>
                 </li>
               </ul>
             </nav>
