@@ -9,7 +9,7 @@ export default function login() {
           <div className="md:w-1/2">
               <div className="flex items-center mb-3">
                   <img src="/assets/images/smk.png" alt="Logo SMKN 1 Kraksaan" className="w-12 h-12" />
-                  <h1 className="ml-3 text-xl font-semibold text-black">
+                  <h1 className="text-xl font-semibold text-black">
                       PKL SMKN 1 <span className="text-blue-500">KRAKSAAN</span>
                   </h1>
               </div>

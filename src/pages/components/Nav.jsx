@@ -15,7 +15,7 @@ export default function Navbar({ backgroundColor }) {
   }, []);
 
   return (
-    <header className={`w-full fixed top-0 left-0 bg-white transition-all z-100 shadow-md ${isNavbarFixed ? 'py-2' : 'py-4'}`} style={{ backgroundColor }}>
+    <header className={`w-full fixed top-0 left-0 bg-white transition-all z-99 shadow-md ${isNavbarFixed ? 'py-2' : 'py-4'}`} style={{ backgroundColor }}>
       <div className="flex justify-between items-center px-10">
         <div className="flex items-center">
           <img src="/assets/images/smk.png" alt="Logo SMKN 1 Kraksaan" className="w-12 h-12" />
