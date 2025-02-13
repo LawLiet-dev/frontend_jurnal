@@ -8,7 +8,7 @@ function Teacher() {
       {/* desktop and tablet*/}
       <div className="hidden md:block">
         {/* Card Colaborator*/}
-        <div className="bg-white flex justify-center items-start min-h-screen py-4">
+        <div className="bg-white flex justify-center items-start min-h-screen py-4 lg:px-10">
           <div className="container mx-auto flex justify-between w-11/12">
           <div className="collaborator bg-white rounded-lg shadow-lg p-4 w-1/3">
             <h2 className="text-lg font-semibold mb-4">

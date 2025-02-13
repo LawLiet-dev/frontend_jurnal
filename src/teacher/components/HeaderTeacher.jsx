@@ -72,7 +72,7 @@ function HeaderTeacher() {
   };
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 lg:px-20">
       {/* Header untuk Desktop */}
       <div className="hidden md:block">
         <header className="bg-white shadow-sm">
