@@ -1,8 +1,11 @@
 import React from 'react'
+import CursorFollower from "../components/CursorFollower";
+import { Link } from 'react-router-dom';
 
 function Reset() {
   return (
     <>
+    <CursorFollower />
     <div className="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl flex flex-col md:flex-row items-center">
           <div className="md:w-1/2">
@@ -27,7 +30,7 @@ function Reset() {
                     <label className="block text-gray-700 font-medium">Confirm Password *</label>
                     <input type="password" placeholder="Enter your confirmation password" className="w-full p-3 mb-4 border border-gray-300 rounded" name='password_confirmation'/>
                   </div>
-                  <a href="/login" className="text-blue-500 text-sm mb-4 inline-block">Ingat Password?</a>
+                  <Link to="/login" className="text-blue-500 text-sm mb-4 inline-block">Ingat Password?</Link>
                   <button className="w-full bg-blue-500 text-white p-3 rounded hover:bg-blue-600">Perbarui</button>
               </form>
           </div>

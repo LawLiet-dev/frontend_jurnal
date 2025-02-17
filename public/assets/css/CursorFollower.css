@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+:root {
+  --blue: #4B89DC; /* Warna biru yang lebih lembut */
+  --blue-shadow: rgba(75, 137, 220, 0.2); /* Bayangan yang sesuai */
+  --white: #ffffff;
+  --yellow: #ffeba7;
+  --purple: #9b59b6;
+}
+
+/* #Cursor
+================================================== */
+.cursor,
+.cursor2,
+.cursor3 {
+  position: fixed;
+  border-radius: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  pointer-events: none;
+  left: -100px;
+  top: 50%;
+  z-index: 10000;
+  transition: all 0.3s ease-out;
+}
+
+.cursor {
+  background-color: var(--blue);
+  height: 0;
+  width: 0;
+  opacity: 0.7; /* Menambahkan sedikit transparansi */
+}
+
+.cursor2,
+.cursor3 {
+  height: 36px;
+  width: 36px;
+  transition: all 200ms ease-out;
+  background-position: center;
+  background-size: 0 0;
+}
+
+.cursor2.hover,
+.cursor3.hover {
+  height: 220px;
+  width: 320px;
+  border: none;
+  border-radius: 12px; /* Sedikit lebih rounded */
+  /* backdrop-filter: blur(2px); Efek blur lembut */
+}
+
+.cursor2 {
+  border: 2px solid var(--blue);
+  box-shadow: 0 0 15px var(--blue-shadow);
+  /* backdrop-filter: blur(1px); */
+}
+
+.cursor2.hover {
+  background-size: cover;
+  box-shadow: 0 5px 20px var(--blue-shadow);
+}
+
+body.img-1-wrap .cursor2,
+body.img-1-wrap .cursor3 {
+  background-image: url('../images/assets-jurusan/RPL.webp');
+  filter: brightness(1.05); /* Sedikit lebih cerah */
+}
+
+body.img-2-wrap .cursor2,
+body.img-2-wrap .cursor3 {
+  background-image: url('../images/assets-jurusan/DKV.webp');
+  filter: brightness(1.05);
+}
+
+body.img-3-wrap .cursor2,
+body.img-3-wrap .cursor3 {
+  background-image: url('../images/assets-jurusan/OTKP.webp');
+  filter: brightness(1.05);
+}
+
+body.img-4-wrap .cursor2,
+body.img-4-wrap .cursor3 {
+  background-image: url('../images/assets-jurusan/TKJ.webp');
+  filter: brightness(1.05);
+}
+
+body.img-5-wrap .cursor2,
+body.img-5-wrap .cursor3 {
+  background-image: url("../images/Img_smk.webp");
+  filter: brightness(1.05);
+}
+
+body.img-6-wrap .cursor2,
+body.img-6-wrap .cursor3 {
+  background-image: url("../images/assets-jurusan/AKL.webp");
+  filter: brightness(1.05);
+}
+
+body.img-7-wrap .cursor2,
+body.img-7-wrap .cursor3 {
+  background-image: url("../images/assets-jurusan/BDP.webp");
+  filter: brightness(1.05);
+}
+
+body.logo-wrap .cursor2,
+body.logo-wrap .cursor3 {
+  background-image: none;
+  height: 36px;
+  width: 36px;
+  transition: all 300ms ease-out; /* Transisi lebih smooth */
+}
+
+body.logo-wrap .cursor2.hover,
+body.logo-wrap .cursor3.hover {
+  height: 36px;
+  width: 36px;
+  transform: scale(2) translateX(-25%) translateY(-25%);
+  border-radius: 50%;
+  background-color: var(--yellow);
+  box-shadow: 0 0 20px rgba(255, 235, 167, 0.3); /* Menambah glow effect */
+}
+
+.hover-target {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  /* color: var(--blue); Mengubah warna teks link */
+  transition: all 250ms ease;
+}
+
+.hover-target:before {
+  position: absolute;
+  content: '';
+  height: 0;
+  border-radius: 2px;
+  bottom: 0;
+  left: -10px;
+  width: calc(100% + 20px);
+  display: block;
+  background-color: var(--blue); /* Mengubah warna highlight */
+  transition: height 250ms ease;
+  mix-blend-mode: soft-light; /* Efek blend yang lebih lembut */
+  opacity: 0.4;
+}
+
+/* .hover-target:hover:before {
+  height: 100%;
+} */
+
+.hover-target:hover {
+  z-index: 5;
+  /* color: var(--blue); */
+}
+
+/* Tambahan untuk efek smooth pada semua transisi */
+* {
+  transition: all 0.3s ease-in-out;
+}

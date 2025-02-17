@@ -1,8 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import CursorFollower from "../components/CursorFollower";
+
+//import store
+// import { useStore } from '../../stores/user';
+
+//import handler error
+// import { handleErrors } from "../../utils/handleErrors";
 
 export default function login() {
+  //navigate
+  // const navigate = useNavigate();
+
+  //destruct action "login" from store
+  // const { login } = useStore();
+
+  //define state
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+
+  //define state errors
+  // const [errors, setErrors] = useState({});
+  // const [loginFailed, setLoginFailed] = useState('');
+
+  //function "loginHanlder"
+  // const loginHandler = async (e) => {
+  //     e.preventDefault();
+
+      //call action "login" from store
+      // await login({ email, password })
+      //     .then((response) => {
+
+              //redirect to dashboard
+              // return navigate('/student');
+          // })
+          // .catch((error) => {
+          //   console.log(error.response);
+          //     if(error.response.data.message) {
+          //         setLoginFailed(error.response.data.message);
+          //         return
+          //     }
+
+              //assign error to function "handleErrors"
+              // handleErrors(error.response.data, setErrors);
+
+          // })
+  // };
   return (
     <>
+    <CursorFollower />
     <div className="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
       {/* <!-- Card Login --> */}
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl flex flex-col md:flex-row items-center">
@@ -15,17 +61,19 @@ export default function login() {
               </div>
               <h2 className="text-2xl font-medium ml-1">Login Your Account</h2>
               <p className="text-gray-600 mb-6 md:ml-1">Enter your email address and password <span className='hidden md:block md:whitespace-pre-line'></span>to access journal.</p>
+              <div>
+              </div>
               <form>
                 <div>
                     <label className="block text-gray-700 font-medium">Email *</label>
-                    <input type="email" placeholder="Your Email" className="w-full p-3 mb-4 border border-gray-300 rounded" />
+                    <input type="email" placeholder="your@email.com"  className="w-full p-3 mb-4 border border-gray-300 rounded" />
                 </div>
                 <div>
                   <label className="block text-gray-700 font-medium">Password *</label>
-                  <input type="password" placeholder="Enter your password" className="w-full p-3 mb-4 border border-gray-300 rounded" />
+                  <input type="password"placeholder="Your password"  className="w-full p-3 mb-4 border border-gray-300 rounded" />
                 </div>
-                  <a href="/reset" className="text-blue-500 text-sm mb-4 inline-block">Lupa Password?</a>
-                  <button className="w-full bg-blue-500 text-white p-3 rounded hover:bg-blue-600">Login</button>
+                  <Link to="/reset" className="text-blue-500 text-sm mb-4 inline-block">Lupa Password?</Link>
+                  <button type="submit" className="w-full bg-blue-500 text-white p-3 rounded hover:bg-blue-600">Login</button>
               </form>
           </div>
           <div className="md:w-1/2 flex justify-center items-center hidden md:block">
@@ -34,7 +82,7 @@ export default function login() {
       </div>
 
       <div className="text-center text-sm mt-4">
-          Apakah anda belum mempunyai akun? <a href="/register" className="text-blue-500">Registrasi</a>
+          Apakah anda belum mempunyai akun? <Link to="/register" className="text-blue-500">Registrasi</Link>
       </div>
   </div>
     </>

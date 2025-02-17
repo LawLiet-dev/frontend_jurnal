@@ -1,8 +1,11 @@
 import React from 'react'
+import CursorFollower from "../components/CursorFollower";
+import { Link } from 'react-router-dom';
 
 function Register() {
   return (
     <>
+    <CursorFollower />
     <div className="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
       {/* <!-- Card Login --> */}
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl flex flex-col md:flex-row items-center">
@@ -14,7 +17,7 @@ function Register() {
                   </h1>
               </div>
               <h2 className="text-2xl font-medium">Create Your Account</h2>
-              <div className="block md:hidden">
+              <div className="md:hidden">
                 <p className="text-gray-600 mb-6">Don't have an account? Create your account, it
                 takes less than a minute.</p>
               </div>
@@ -45,8 +48,8 @@ function Register() {
                   <input type="password" placeholder="Enter your password" className="w-full border border-gray-300 rounded-lg p-2" />
                 </div>
               </div>
-              <div class="col-span-2 mt-5">
-                  <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-md transition">
+              <div className="col-span-2 mt-5">
+                  <button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-md transition">
                       Register
                   </button>
               </div>
@@ -58,7 +61,7 @@ function Register() {
       </div>
 
       <div className="text-center text-sm mt-4">
-          Apakah anda sudah mempunyai akun? <a href="/login" className="text-blue-500">Login</a>
+          Apakah anda sudah mempunyai akun? <Link to="/login" className="text-blue-500">Login</Link>
       </div>
   </div>
     </>

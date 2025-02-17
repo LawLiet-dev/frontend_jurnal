@@ -1,6 +1,5 @@
 import React from 'react'
 import HeaderTeacher from './components/HeaderTeacher'
-import '../../public/assets/css/teacher.css'
 
 function Siswa() {
   return (
