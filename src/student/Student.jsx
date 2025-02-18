@@ -9,7 +9,7 @@ function Student() {
       <HeaderStudent />
       <Notification />
 
-      {/* <div className="bg-gray-100">
+      <div className="bg-gray-100">
   <div className="container mx-auto p-4">
    <div className="flex flex-col lg:flex-row gap-4">
     <div className="bg-white p-6 rounded-lg shadow-lg flex-1">
@@ -19,30 +19,11 @@ function Student() {
         Journal Saya
        </h1>
        <p className="text-sm text-gray-600">
-        Pembimbing: Anda belum memilih pembimbing
-        <a className="text-blue-500" href="#">
+        Pembimbing: Anda belum memilih pembimbing &nbsp;
+        <a className="text-blue-500" href="list">
          Pilih
         </a>
        </p>
-      </div>
-      <div>
-       <select className="border border-gray-300 rounded-lg p-2">
-        <option>
-         December 2024
-        </option>
-        <option>
-         January 2025
-        </option>
-        <option>
-         February 2025
-        </option>
-        <option>
-         March 2025
-        </option>
-        <option>
-         April 2025
-        </option>
-       </select>
       </div>
      </div>
      <table className="w-full text-left">
@@ -64,8 +45,8 @@ function Student() {
       </thead>
       <tbody>
        <tr className="border-b">
-        <td className="py-2">
-         <img alt="Image description" className="w-20 h-20 object-cover" height="100" src="https://storage.googleapis.com/a1aa/image/buw9VOufM2rjZjRB2Fg0CdFlosI9GvWWRjkijLHFFJ4.jpg" width="100"/>
+        <td className="py-4">
+         <img alt="Image description" className="w-20 h-20 object-cover" height="100" src="/assets/images/pkl.jpg" width="100" />
         </td>
         <td className="py-2">
          Lorem ipsum generator,...
@@ -76,14 +57,12 @@ function Student() {
         <td className="py-2">
          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
           Detail
-          <i className="fas fa-chevron-right">
-          </i>
          </button>
         </td>
        </tr>
        <tr className="border-b">
-        <td className="py-2">
-         <img alt="Image description" className="w-20 h-20 object-cover" height="100" src="https://storage.googleapis.com/a1aa/image/buw9VOufM2rjZjRB2Fg0CdFlosI9GvWWRjkijLHFFJ4.jpg" width="100"/>
+        <td className="py-4">
+         <img alt="Image description" className="w-20 h-20 object-cover" height="100" src="/assets/images/pkl.jpg" width="100"/>
         </td>
         <td className="py-2">
          Lorem ipsum generator,...
@@ -94,14 +73,12 @@ function Student() {
         <td className="py-2">
          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
           Detail
-          <i className="fas fa-chevron-right">
-          </i>
          </button>
         </td>
        </tr>
        <tr className="border-b">
-        <td className="py-2">
-         <img alt="Image description" className="w-20 h-20 object-cover" height="100" src="https://storage.googleapis.com/a1aa/image/buw9VOufM2rjZjRB2Fg0CdFlosI9GvWWRjkijLHFFJ4.jpg" width="100"/>
+        <td className="py-4">
+         <img alt="Image description" className="w-20 h-20 object-cover" height="100" src="/assets/images/pkl.jpg" width="100"/>
         </td>
         <td className="py-2">
          Lorem ipsum generator,...
@@ -112,14 +89,12 @@ function Student() {
         <td className="py-2">
          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
           Detail
-          <i className="fas fa-chevron-right">
-          </i>
          </button>
         </td>
        </tr>
        <tr className="border-b">
-        <td className="py-2">
-         <img alt="Image description" className="w-20 h-20 object-cover" height="100" src="https://storage.googleapis.com/a1aa/image/buw9VOufM2rjZjRB2Fg0CdFlosI9GvWWRjkijLHFFJ4.jpg" width="100"/>
+        <td className="py-4">
+         <img alt="Image description" className="w-20 h-20 object-cover" height="100" src="/assets/images/pkl.jpg" width="100"/>
         </td>
         <td className="py-2">
          Lorem ipsum generator,...
@@ -130,45 +105,68 @@ function Student() {
         <td className="py-2">
          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
           Detail
-          <i className="fas fa-chevron-right">
-          </i>
+         </button>
+        </td>
+       </tr>
+       <tr className="border-4">
+        <td className="py-5">
+         <img alt="Image description" className="w-20 h-20 object-cover" height="100" src="/assets/images/pkl.jpg" width="100"/>
+        </td>
+        <td className="py-2">
+         Lorem ipsum generator,...
+        </td>
+        <td className="py-2 text-blue-500">
+         01 Januari 2025
+        </td>
+        <td className="py-2">
+         <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+          Detail
          </button>
         </td>
        </tr>
       </tbody>
      </table>
     </div>
-    <div className="bg-blue-500 p-6 rounded-lg shadow-lg w-full lg:w-1/3">
-     <h2 className="text-white text-lg font-semibold mb-4">
+    <div className="bg-blue-500 rounded-lg shadow-lg p-2 ml-0 lg:ml-6 mt-6 lg:mt-0 w-full lg:w-1/3">
+     <h2 className="text-white text-xl font-semibold px-5 mt-5">
       Statistik Jurnal
      </h2>
-     <div className="flex justify-center mb-4">
-      <img alt="Statistik Jurnal Logo" className="w-60 h-60 object-cover" height="150" src="/assets/images/smk.png" width="150"/>
-     </div>
-     <div className="bg-white p-20 rounded-lg mt-10">
-      <div className="flex justify-between items-center mb-2">
-       <span className="text-gray-700">
-        Mengisi Journal
-       </span>
-       <span className="text-blue-500">
-        5X
-       </span>
+     <p className="text-white px-5 mb-4">
+      jurnal siswa
+     </p>
+     <img alt="School logo" className="mx-auto" height="200" src="/assets/images/smk.png" width="200"/>
+     <div className="bg-white rounded-lg p-10 mt-10">
+      <div className="flex justify-between items-center mb-10">
+       <div>
+        <p className="text-gray-500 text-xl font-semibold">
+         Mengisi
+        </p>
+        <p className="text-gray-500">
+         Journal
+        </p>
+       </div>
+       <div className="text-blue-500 bg-blue-100 rounded-lg px-3">
+        5 X
+       </div>
       </div>
       <div className="flex justify-between items-center">
-       <span className="text-gray-700">
-        Tidak mengisi Journal
-       </span>
-       <span className="text-blue-500">
-        10X
-       </span>
+       <div>
+        <p className="text-gray-500 text-xl font-semibold">
+         Tidak mengisi
+        </p>
+        <p className="text-gray-500">
+         Journal
+        </p>
+       </div>
+       <div className="text-blue-500 bg-blue-100 rounded-lg px-3">
+        10 X
+       </div>
       </div>
      </div>
     </div>
    </div>
   </div>
-      </div> */}
-
-
+  </div>
     </div>
   );
 }

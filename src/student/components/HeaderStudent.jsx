@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Mail } from "lucide-react";
+import Select from "react-select"; // Import react-select
 
 function HeaderStudent() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isNavbarFixed, setIsNavbarFixed] = useState(false);
+  const [setIsNavbarFixed] = useState(false);
   
   // Desktop states and refs
   const [isDesktopProfileOpen, setIsDesktopProfileOpen] = useState(false);
@@ -14,6 +14,9 @@ function HeaderStudent() {
   const [isMobileProfileOpen, setIsMobileProfileOpen] = useState(false);
   const mobileDropdownRef = useRef(null);
   const mobileProfileButtonRef = useRef(null);
+
+  // State for setting modal visibility
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
   // Handle navbar fixed on scroll
   useEffect(() => {
@@ -67,9 +70,32 @@ function HeaderStudent() {
     setIsDesktopProfileOpen(!isDesktopProfileOpen);
   };
 
-  const handleMobileProfileClick = () => {
-    setIsMobileProfileOpen(!isMobileProfileOpen);
+  const handleSettingsClick = () => {
+    setIsSettingsModalOpen(true); // Show the modal on button click
   };
+
+  const handleCloseSettingsModal = () => {
+    setIsSettingsModalOpen(false); // Close the modal
+  };
+
+  const handleSaveSettings = () => {
+    // Handle saving settings
+    console.log("Settings saved!");
+    setIsSettingsModalOpen(false); // Close the modal after saving
+  };
+
+  // Options for DUDI and Pembimbing Select
+  const dudiOptions = [
+    { value: 'dudi1', label: 'DUDI 1' },
+    { value: 'dudi2', label: 'DUDI 2' },
+    { value: 'dudi3', label: 'DUDI 3' }
+  ];
+
+  const pembimbingOptions = [
+    { value: 'pembimbing1', label: 'Pembimbing 1' },
+    { value: 'pembimbing2', label: 'Pembimbing 2' },
+    { value: 'pembimbing3', label: 'Pembimbing 3' }
+  ];
 
   return (
     <div className="bg-gray-100">
@@ -88,11 +114,8 @@ function HeaderStudent() {
               </h1>
             </div>
             <div className="flex items-center space-x-4">
-              <a href="list">
-                <svg className="w-6 h-6 text-gray-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 13h3.439a.991.991 0 0 1 .908.6 3.978 3.978 0 0 0 7.306 0 .99.99 0 0 1 .908-.6H20M4 13v6a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-6M4 13l2-9h12l2 9"/>
-                </svg>
-              </a> 
+              {/* button */}
+              <a className="bg-orange-300 text-white px-4 py-2 rounded inline-flex items-center text-sm">Student</a>
               <div className="relative ml-auto z-40">
                 {/* Desktop Profile Button */}
                 <div 
@@ -128,7 +151,7 @@ function HeaderStudent() {
                       />
                       <div className="ml-4">
                         <h5 className="text-lg font-semibold text-gray-800">Farel</h5>
-                        <span className="block text-gray-600 text-sm mb-1">RPL</span>
+                        <span className="block text-gray-600 text-sm mb-1">0023889765</span>
                         <div className="flex items-center text-gray-600 text-sm">
                           <Mail className="w-4 h-4 mr-2" />
                           Farel@gmail.com
@@ -136,6 +159,12 @@ function HeaderStudent() {
                       </div>
                     </div>
                     <div className="pt-4 space-y-2">
+                      <button 
+                        className="w-full bg-primary hover:bg-primary text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium"
+                        onClick={handleSettingsClick} // Open the settings modal
+                      >
+                        Setting
+                      </button>
                       <button className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium">
                         Logout
                       </button>
@@ -149,7 +178,7 @@ function HeaderStudent() {
         <nav className="bg-white shadow-sm">
           <div className="container mx-auto flex space-x-4 py-2 px-6">
             <a
-              href="student"
+              href="dashboardsiswa"
               className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
             >
               Dashboard
@@ -164,130 +193,63 @@ function HeaderStudent() {
         </nav>
       </div>
 
-      {/* Header untuk Mobile & Tablet */}
-      <div className={`block md:hidden ${isNavbarFixed ? "py-2" : "py-4"}`}>
-        <div className="flex justify-between items-center px-6">
-          {/* Tombol Hamburger di kiri */}
-          <div className="text-center">
-            <button 
-              className="text-black"
-              data-drawer-target="drawer-navigation"
-              data-drawer-show="drawer-navigation"
-              aria-controls="drawer-navigation"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <rect width="24" height="24" fill="none" />
-                <path fill="currentColor" d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h16q.425 0 .713.288T21 17t-.288.713T20 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Drawer Navigation */}
-            <div 
-                id="drawer-navigation" 
-                className="fixed top-0 left-0 z-99 w-75 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white" 
-                tabIndex="-1" 
-                aria-labelledby="drawer-navigation-label"
-              >
-                <div className="flex item-center">
-                  <img src="/assets/images/icons/smk.png" alt="smk" className="w-9 h-12" />
-                  <h5 id="drawer-navigation-label" className="text-base font-semibold text-gray-500 uppercase my-auto">
-                    PKL SMKN 1 <span className="text-blue-500">KRAKSAAN</span>
-                  </h5>
-                </div>
-                <button 
-                  type="button" 
-                  data-drawer-hide="drawer-navigation" 
-                  aria-controls="drawer-navigation" 
-                  className="text-gray-400 bg-transparent mt-3 hover:bg-gray-200 hover:text-black rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center hover:bg-blue-500"
-                >
-                  <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path>
-                  </svg>
-                  <span className="sr-only">Close menu</span>
-                </button>
-              <div className="border border-b-gray-500"></div>
-                <div className="py-4 overflow-y-auto">
-                  <ul className="space-y-2 font-medium">
-                    <li>
-                      <a href="student" className="flex items-center p-2 text-black rounded-lg hover:bg-blue-500 hover:text-white group">
-                        <svg className="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
-                          <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
-                          <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
-                        </svg>
-                        <span className="ms-3">Dashboard</span>
-                      </a>
-                    </li>
-                    <li>
-                        <a href="jurnal" className="flex items-center p-2 text-black rounded-lg hover:bg-blue-500 group">
-                          <svg className="shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-                              <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
-                          </svg>
-                          <span className="flex-1 ms-3 whitespace-nowrap">jurnal</span>
-                        </a>
-                    </li>
-                  </ul>
-              </div>
-          </div>
-          <div className="flex items-center space-x-4">
-              <a href="list">
-                {/* <i className="fas fa-clipboard-list text-gray-500 mr-2"></i> */}
-                <svg className="w-6 h-6 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 13h3.439a.991.991 0 0 1 .908.6 3.978 3.978 0 0 0 7.306 0 .99.99 0 0 1 .908-.6H20M4 13v6a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-6M4 13l2-9h12l2 9"/>
-                </svg>
-              </a> 
-              <div className="relative z-40">
-                <div
-                  className="flex items-center space-x-4 cursor-pointer"
-                  onClick={handleMobileProfileClick}
-                  ref={mobileProfileButtonRef}
-                >
-                  <img
-                    alt="User profile picture"
-                    className="h-10 w-10 rounded-full"
-                    src="/assets/images/profile/user-7.jpg"
-                  />
-                </div>
-
-                {/* Mobile Dropdown Menu */}
-                <div 
-                  ref={mobileDropdownRef}
-                  className={`absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-100 transition-all duration-300 ${
-                    isMobileProfileOpen 
-                      ? "opacity-100 translate-y-0" 
-                      : "opacity-0 -translate-y-2 pointer-events-none"
-                  }`}
-                >
-                  <div className="p-6">
-                    <div className="mb-4">
-                      <h5 className="text-xl font-semibold text-gray-800">User Profile</h5>
-                    </div>
-                    <div className="flex items-center pb-4 border-b border-gray-200">
-                      <img 
-                        src="/assets/images/profile/user-7.jpg" 
-                        className="rounded-full w-16 h-16 border-2 border-gray-200 object-cover"
-                        alt="Profile"
-                      />
-                      <div className="ml-4">
-                        <h5 className="text-lg font-semibold text-gray-800">Farel</h5>
-                        <span className="block text-gray-600 text-sm mb-1">RPL</span>
-                        <div className="flex items-center text-gray-600 text-sm">
-                          <Mail className="w-4 h-4 mr-2" />
-                          Farel@gmail.com
-                        </div>
-                      </div>
-                    </div>
-                    <div className="pt-4 space-y-2">
-                      <button className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium">
-                        Logout
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
+      {/* Settings Modal Pop-Up */}
+      {isSettingsModalOpen && (
+  <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
+    <div className="bg-white p-8 rounded-lg shadow-lg w-1/4 relative"> {/* Mengatur lebar modal */}
+      
+      {/* Close Icon (di pojok kanan atas) */}
+      <button 
+        onClick={handleCloseSettingsModal} 
+        className="absolute top-4 right-4 text-gray-600 hover:text-gray-800">
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      
+      {/* Gambar di atas select2 */}
+      <div className="mb-4 text-center">
+        <img
+          src="/assets/images/smk.png"
+          alt="Settings Icon"
+          className="w-30 h-30 mx-auto mb-4"
+        />
       </div>
+
+      {/* Select2 for DUDI */}
+      <div className="mb-4">
+        <label htmlFor="dudi-select" className="block text-sm font-medium text-gray-600 mb-2">Silahkan pilih Dudi anda</label>
+        <Select
+          id="dudi-select"
+          options={dudiOptions}
+          placeholder="Pilih Dudi"
+        />
+      </div>
+
+      {/* Select2 for Pembimbing */}
+      <div className="mb-4">
+        <label htmlFor="pembimbing-select" className="block text-sm font-medium text-gray-600 mb-2">Silahkan pilih Pembimbing anda</label>
+        <Select
+          id="pembimbing-select"
+          options={pembimbingOptions}
+          placeholder="Pilih Pembimbing"
+        />
+      </div>
+
+      {/* Buttons: Simpan and Batal */}
+      <div className="flex space-x-4 mt-5">
+        <button
+          onClick={handleSaveSettings}
+          className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg mb-5"
+        >
+          Simpan Pilihan
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }
