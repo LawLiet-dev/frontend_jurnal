@@ -10,11 +10,11 @@ import Siswa from './teacher/Siswa'
 import Student from './student/Student'
 import Jurnal from './student/jurnal'
 import List from './student/List'
-// import ProtectedRoute from '../utils/ProtectedRoute';
-// import ProtectedRoute from '../utils/ProtectedRoute'
-// import AccessDenied from './error/403_pages'
-// import Notfound from './error/404_pages'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useAuthStore } from './store/auth';
+import ProtectedRoute from './components/ProtectedRoute';
+import AccessDenied from './errors/403';
+
 
 function App() {
 
@@ -39,24 +39,28 @@ function App() {
      {/* </BrowserRouter> */}
     {/* //  </Router> */}
      {/* <BrowserRouter> */}
-    <Router>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/reset' element={<Reset/>}/>
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/about' element={<About />} /> 
-        {/* <Route path='/access_denied' element={<AccessDenied />} />
-        <Route path='/not_found' element={<Notfound />} /> */}
-        {/* <Route element={<ProtectedRoute allowedRoles={['teacher']} />}> */}
-          <Route path='/teacher' element={<Teacher />} /> 
-        {/* </Route> */}
-        {/* <Route element={<ProtectedRoute allowedRoles={['student']} />}> */}
-          <Route path='/student' element={<Student />} />
-        {/* </Route> */}
-      </Routes>
-    </Router>
+     <Router>
+            <Routes>
+                {/* Public routes */}
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/reset" element={<Reset />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/403" element={<AccessDenied />} />
+                
+                {/* Protected routes */}
+                <Route element={<ProtectedRoute allowedRoles={['teacher']} />}>
+                    <Route path="/teacher/*" element={<Teacher />} />
+                </Route>
+                
+                <Route element={<ProtectedRoute allowedRoles={['student']} />}>
+                    <Route path="/student/*" element={<Student />} />
+                    <Route path="/jurnal/*" element={<Jurnal />} />
+                </Route>
+            </Routes>
+        </Router>
     {/* // </BrowserRouter> */}
     </div>
   )

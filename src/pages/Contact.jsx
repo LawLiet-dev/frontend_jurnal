@@ -1,10 +1,12 @@
 import React from "react";
 import HeaderLanding from "../components/HeaderLanding";
 import Footer from "../components/Footer";
+import CursorFollower from "../components/CursorFollower.jsx";
 
 function Contact() {
   return (
     <div>
+      <CursorFollower />
       <HeaderLanding backgroundColor="#F1F5F9" />
 
       <section className="bg-default-100 lg:pt-28 sm:pb-36 pb-16 pt-36 relative">

@@ -1,13 +1,14 @@
 import React from "react";
 import HeaderLanding from "../components/HeaderLanding";
 import Footer from "../components/Footer";
+import CursorFollower from "../components/CursorFollower.jsx";
 import { Link } from "react-router-dom";
 import "../../public/assets/css/teacher.css";
 
 function About() {
   return (
     <div>
-      
+      <CursorFollower />
       <HeaderLanding backgroundColor="#fff" />
 
       <section className="py-44 relative">
