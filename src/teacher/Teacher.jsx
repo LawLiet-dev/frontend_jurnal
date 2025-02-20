@@ -1,5 +1,5 @@
 import React from 'react'
-import HeaderTeacher from './components/HeaderTeacher'
+import HeaderTeacher from '../components/HeaderGuru'
 
 function Teacher() {
   return (

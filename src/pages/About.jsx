@@ -61,7 +61,7 @@ function About() {
               {/* data-aos="fade-right" data-aos-duration="1000" */}
               <div className="flex space-x-4">
                 <a
-                  href="#"
+                  href="#lihat"
                   className="shadow-2xl bg-black opacity-70 text-white px-6 py-3 rounded-md flex items-center space-x-4 hover:shadow-lg hover:shadow-black/50 focus:outline focus:outline-black/50 transition-all duration-500">
                   {/* <i className="fas fa-arrow-down"></i> */}
                   <span>
@@ -89,7 +89,7 @@ function About() {
         </div>
       </section>
 
-      <section className="py-20">
+      <section className="py-20" id="lihat">
         <div className="container">
           <div className="text-center">
             {/* <span className="text-sm font-medium py-1 px-3 rounded-full text-primary bg-primary/10">Blog</span> */}

@@ -65,7 +65,7 @@ const Student = () => {
   return (
     <div>
       <HeaderSiswa />
-      <div className="bg-gray-100 min-h-screen">
+      <div className="bg-gray-100 min-h-screen lg:container">
         <div className="container mx-auto p-4">
           <div className="flex flex-col lg:flex-row gap-4">
             <div className="bg-white p-6 rounded-lg shadow-lg flex-1">
@@ -74,9 +74,6 @@ const Student = () => {
                   <h1 className="text-xl font-semibold">Journal Saya</h1>
                   <p className="text-sm text-gray-600">
                     Pembimbing: Anda belum memilih pembimbing &nbsp;
-                    <a href="list" className="text-blue-500 hover:text-blue-700 underline">
-                      Pilih
-                    </a>
                   </p>
                 </div>
               </div>

@@ -245,7 +245,7 @@ function HeaderSiswa() {
     <div className="bg-gray-100">
       {/* Header untuk Desktop */}
       <div className="hidden md:block">
-        <header className="bg-white shadow-sm">
+        <header className="bg-white shadow-sm lg:container">
           <div className="container mx-auto flex justify-between items-center py-4 px-6">
             <div className="flex items-center">
               <img
@@ -324,7 +324,7 @@ function HeaderSiswa() {
         </header>
         
         {/* Navigation */}
-        <nav className="bg-white shadow-sm">
+        <nav className="bg-white shadow-sm container">
           <div className="container mx-auto flex space-x-4 py-2 px-6">
             <Link
               to="/student/*"
