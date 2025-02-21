@@ -34,12 +34,10 @@ const Register = () => {
     setErrors({});
 
     try {
-      // Directly send formData to Api.post
       const response = await Api.post('/api/register', formData);
 
       if (response.data.success) {
-        // Registration successful
-        navigate('/login'); // Redirect to login page
+        navigate('/login');
       }
     } catch (err) {
       if (err.response?.status === 422) {

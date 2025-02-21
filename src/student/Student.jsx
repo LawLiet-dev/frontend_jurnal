@@ -16,6 +16,17 @@ const Student = () => {
     total: 0,
     perPage: 10
   });
+  // const [teacherStatus, setTeacherStatus] = useState({
+  //   name: '',
+  //   status: 'pending'
+  // });
+  const [submissionStatus, setSubmissionStatus] = useState({
+    isSubmitted: false,
+    status: 'pending',
+    rejectReason: null,
+    teacherName: '',
+    dudiName: ''
+  });
 
   const fetchJournalData = async (pageNumber = 1) => {
     setLoading(true);
@@ -46,6 +57,38 @@ const Student = () => {
   };
 
   useEffect(() => {
+    const fetchSubmissionStatus = async () => {
+      try {
+        const token = Cookies.get("token");
+        if (!token) return;
+
+        Api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        const response = await Api.get("/api/settings");
+        
+        if (response.data.status) {
+          const { students, teacher, dudi } = response.data.data;
+          
+          // Find the matching teacher and dudi names
+          const selectedTeacher = teacher.find(t => t.id === students?.teachers_id);
+          const selectedDudi = dudi.find(d => d.id === students?.dudis_id);
+
+          setSubmissionStatus({
+            isSubmitted: !!(students?.teachers_id && students?.dudis_id),
+            status: students?.status || 'pending',
+            rejectReason: students?.reject_reason,
+            teacherName: selectedTeacher?.name || '',
+            dudiName: selectedDudi?.name || ''
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching submission status:', error);
+      }
+    };
+
+    fetchSubmissionStatus();
+  }, []);
+
+  useEffect(() => {
     fetchJournalData();
   }, []);
 
@@ -62,6 +105,33 @@ const Student = () => {
     });
   };
 
+  const renderSubmissionStatus = () => {
+    if (!submissionStatus.isSubmitted) {
+      return null;
+    }
+
+    switch (submissionStatus.status.toLowerCase()) {
+      case 'approved':
+        return (
+          <p className="text-sm text-green-800">
+              Permintaan disetujui. Guru anda sekarang adalah {submissionStatus.teacherName} dan pkl di industri {submissionStatus.dudiName}
+          </p>
+        );
+      case 'rejected':
+        return (
+          <p className="text-sm text-red-800">
+              Permintaan ditolak. Alasan {submissionStatus.rejectReason}
+          </p>
+        );
+      default:
+        return (
+          <p className="text-sm text-yellow-800">
+              Menunggu Persetujuan
+          </p>
+        );
+    }
+  };
+
   return (
     <div>
       <HeaderSiswa />
@@ -72,23 +142,28 @@ const Student = () => {
               <div className="flex justify-between items-center mb-4">
                 <div>
                   <h1 className="text-xl font-semibold">Journal Saya</h1>
-                  <p className="text-sm text-gray-600">
+                  {/* <p className="text-sm text-gray-600">
                     Pembimbing: Anda belum memilih pembimbing &nbsp;
                     <a href="list" className="text-blue-500 hover:text-blue-700 underline">
                       Pilih
                     </a>
-                  </p>
+                  </p> */}
+                  {renderSubmissionStatus()}
                 </div>
               </div>
 
               {loading ? (
                 <div className="flex flex-col justify-center items-center h-40 space-y-4">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                  {/* <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
                   <div className="text-gray-600 font-medium">
                     Sedang memuat data journal...
                   </div>
                   <div className="text-sm text-gray-500">
                     Mohon tunggu sebentar
+                  </div> */}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><rect width="10" height="10" x="1" y="1" fill="currentColor" rx="1"><animate id="svgSpinnersBlocksShuffle20" fill="freeze" attributeName="x" begin="0;svgSpinnersBlocksShuffle27.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle21" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle24.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle22" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle25.end" dur="0.2s" values="13;1"/><animate id="svgSpinnersBlocksShuffle23" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle26.end" dur="0.2s" values="13;1"/></rect><rect width="10" height="10" x="1" y="13" fill="currentColor" rx="1"><animate id="svgSpinnersBlocksShuffle24" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle20.end" dur="0.2s" values="13;1"/><animate id="svgSpinnersBlocksShuffle25" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle21.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle26" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle22.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle27" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle23.end" dur="0.2s" values="13;1"/></rect></svg>
+                  <div className="text-sm text-gray-500">
+                    Mohon tunggu sebentar...
                   </div>
                 </div>
               ) : (

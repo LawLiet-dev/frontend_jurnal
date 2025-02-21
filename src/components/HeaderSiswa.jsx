@@ -14,7 +14,8 @@ function HeaderSiswa() {
   const [studentData, setStudentData] = useState({
     student: null,
     teachers: [],
-    dudis: []
+    dudis: [],
+    approvalStatus: null 
   });
   
   // States for dropdown menus
@@ -105,7 +106,8 @@ function HeaderSiswa() {
         setStudentData({
           student: students,
           teachers: teacher,
-          dudis: dudi
+          dudis: dudi,
+          approvalStatus: students?.approval_status || 'pending' 
         });
 
         // Set initial selected values if they exist
@@ -153,7 +155,7 @@ function HeaderSiswa() {
 
       if (response.data.status) {
         setIsSettingsModalOpen(false);
-        fetchSettings(); // Refresh data after successful update
+        fetchSettings();
       }
     } catch (error) {
       console.error("Error saving settings:", error);
@@ -207,9 +209,9 @@ function HeaderSiswa() {
   };
 
   // Initial data fetch
-  useEffect(() => {
-    fetchSettings();
-  }, []);
+    useEffect(() => {
+      fetchSettings();
+    }, []);
 
   // Convert data to Select options
   const dudiOptions = studentData.dudis.map(dudi => ({
@@ -350,8 +352,8 @@ function HeaderSiswa() {
       </div>
 
       {/* Settings Modal */}
-      {isSettingsModalOpen && (
-      <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
+      {isSettingsModalOpen && ( 
+      <div className="fixed inset-0 flex items-center justify-center bg-gray-50 bg-opacity-50 z-50">
         <div className="bg-white p-8 rounded-lg shadow-lg w-1/4 relative" ref={modalRef}>
           <button 
             onClick={handleCloseSettingsModal}
@@ -454,7 +456,7 @@ function HeaderSiswa() {
         {/* Mobile Sidebar */}
         <div 
           ref={sidebarRef}
-          className={`fixed top-0 left-0 z-40 h-screen w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
+          className={`fixed top-0 left-0 z-40 bottom-0 h-screen w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
             isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
@@ -515,6 +517,13 @@ function HeaderSiswa() {
               >
                 Jurnal
               </Link>
+              <button 
+                onClick={handleExportPDF}  
+                style={{ color:"#4B5563" }}
+                className="px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg hover:bg-blue-500"
+              >
+                Export PDF
+            </button>
             </nav>
 
             {/* Bottom Actions */}

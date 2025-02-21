@@ -11,11 +11,6 @@ function Siswa() {
             <h1 className="text-2xl font-bold lg:ml-4">
             Jurnal Harian Siswa 
             </h1>
-            {/* <select className="p-2 border border-gray-300 rounded">
-            <option>
-              March 2024
-            </option>
-            </select> */}
           </div>
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white">

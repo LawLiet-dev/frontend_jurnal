@@ -22,6 +22,9 @@ const Jurnal = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [tableLoading, setTableLoading] = useState(false);
   const [formSubmitting, setFormSubmitting] = useState(false);
+  const [nameStatus, setNameStatus] = useState({
+      studentsName: ''
+    });
   
   const token = Cookies.get('token');
 
@@ -111,100 +114,40 @@ const Jurnal = () => {
   };
 
   // Handle form submission (create/update)
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setErrors({}); // Clear previous errors
-    
-//     try {
-//       Api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      setErrors({}); // Clear previous errors
       
-//       let response;
-//       if (isEditing) {
-//         response = await Api.put(`/api/journal/${editingId}`, {
-//           name,
-//           description
-//         });
-//       } else {
-//         response = await Api.post('/api/journal', {
-//           date,
-//           name,
-//           description
-//         });
-//       }
-
-//       if (response.data.status) {
-//         toast.success(response.data.message);
-//         resetForm();
-//         fetchJournals(currentPage);
-//       }
-//     } catch (error) {
-//       handleErrors(error);
-//     }
-//   };
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     setErrors({}); // Clear previous errors
+      try {
+        setFormSubmitting(true);
+        Api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         
-    //     try {
-    //     Api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        
-    //     let response;
-    //     if (isEditing) {
-    //         response = await Api.put(`/api/journal/${editingId}`, {
-    //         name,
-    //         description
-    //         });
-    //     } else {
-    //         response = await Api.post('/api/journal', {
-    //         date,
-    //         name,
-    //         description
-    //         });
-    //     }
-    
-    //     if (response.data.status) {
-    //         toast.success(response.data.message);
-    //         resetForm();
-    //         fetchJournals(currentPage);
-    //     }
-    //     } catch (error) {
-    //     handleErrors(error);
-    //     }
-    // };
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setErrors({}); // Clear previous errors
-        
-        try {
-          setFormSubmitting(true);
-          Api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-          
-          let response;
-          if (isEditing) {
-            response = await Api.put(`/api/journal/${editingId}`, {
-              name,
-              description,
-              date 
-            });
-          } else {
-            response = await Api.post('/api/journal', {
-              date,
-              name,
-              description
-            });
-          }
-      
-          if (response.data.status) {
-            toast.success(response.data.message);
-            resetForm();
-            fetchJournals(currentPage);
-          }
-        } catch (error) {
-            handleErrors(error);
-        } finally {
-            setFormSubmitting(false);
+        let response;
+        if (isEditing) {
+          response = await Api.put(`/api/journal/${editingId}`, {
+            name,
+            description,
+            date 
+          });
+        } else {
+          response = await Api.post('/api/journal', {
+            date,
+            name,
+            description
+          });
         }
-      };
+    
+        if (response.data.status) {
+          toast.success(response.data.message);
+          resetForm();
+          fetchJournals(currentPage);
+        }
+      } catch (error) {
+          handleErrors(error);
+      } finally {
+          setFormSubmitting(false);
+      }
+    };
 
   // Reset form and editing state
   const resetForm = () => {
@@ -259,6 +202,30 @@ const Jurnal = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchnameStatus = async () => {
+      try {
+        const token = Cookies.get("token");
+        if (!token) return;
+
+        Api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        const response = await Api.get("/api/settings");
+        
+        if (response.data.status) {
+          const { students} = response.data.data;
+
+          setNameStatus({
+            studentsName: students?.name
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching submission status:', error);
+      }
+    };
+
+    fetchnameStatus();
+  }, []);
+
   // Initial fetch
   useEffect(() => {
     fetchJournals(1);
@@ -271,26 +238,10 @@ const Jurnal = () => {
         <div className="mx-auto container">
           <div className="flex flex-col lg:flex-row">
             {/* Form Section */}
-            <div className="w-full lg:w-1/3 bg-white p-6 rounded-lg shadow-md mb-6 lg:mb-0">
+            <div className="w-full bg-white p-6 rounded-lg shadow-md mb-6 lg:mb-0" style={{ width:"500px" }}>
+             <h2 text-xl text-gray-600 font-bold style={{ marginBottom:"10px" }}>Form Jurnal {nameStatus.studentsName}</h2>
             <Toaster position="top-right" />
               <form onSubmit={handleSubmit}>
-                {/* <div className="mb-4">
-                  <label className="block text-gray-700" htmlFor="tanggal">Tanggal</label>
-                  <div className="relative">
-                    <input 
-                      className={`w-full border ${errors.date ? 'border-red-500' : 'border-gray-300'} p-2 rounded`}
-                      id="tanggal" 
-                      type="date"
-                      value={date}
-                      onChange={(e) => setDate(e.target.value)}
-                      required
-                      disabled={isEditing}
-                    />
-                    {errors.date && (
-                      <p className="text-red-500 text-sm mt-1">{errors.date[0]}</p>
-                    )}
-                  </div>
-                </div> */}
                 <div className="mb-4">
                   <label className="block text-gray-700" htmlFor="tanggal">Tanggal</label>
                     <div className="relative">
@@ -358,36 +309,34 @@ const Jurnal = () => {
                   )}
                 </div>
                 <div className="flex gap-18">
-                  {/* <button 
-                    type="submit" 
-                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                  >
-                    {isEditing ? 'Update' : 'Submit'}
-                  </button> */}
                   <button 
                     type="submit" 
                     disabled={formSubmitting}
                     className={`${
                         formSubmitting ? 'bg-blue-500' : 'bg-blue-500 hover:bg-blue-600'
-                    } text-white px-4 py-2 rounded transition-colors`}
+                    } text-white px-4 py-2 rounded transition-colors w-full`}
                     >
                     {formSubmitting ? 'Loading...' : isEditing ? 'Update' : 'Submit'}
                   </button>
-                  <button 
+                  {/* <button className='bg-blue-500 hover:bg-blue-600 text-white w-full h-10 rounded transition-colors'>Submit</button> */}
+                  {/* <button 
                     type="button"
                     onClick={resetForm}
                     className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                   >
                     Cancel
-                  </button>
+                  </button> */}
                 </div>
               </form>
             </div>
 
             {/* Table Section */}
-            <div className="w-full bg-white p-6 rounded-lg shadow-md md:ml-9 md:h-[437px] overflow-x-auto">
+            <div className="w-full bg-white p-6 rounded-lg shadow-md md:ml-9 md:h-[475px] overflow-x-auto">
                 {tableLoading ? (
-                    <div className="text-center py-4">Loading...</div>
+                    // <div className="text-center py-4">Loading...</div>
+                    <div className="flex flex-col justify-center items-center h-30">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><rect width="10" height="10" x="1" y="1" fill="currentColor" rx="1"><animate id="svgSpinnersBlocksShuffle20" fill="freeze" attributeName="x" begin="0;svgSpinnersBlocksShuffle27.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle21" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle24.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle22" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle25.end" dur="0.2s" values="13;1"/><animate id="svgSpinnersBlocksShuffle23" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle26.end" dur="0.2s" values="13;1"/></rect><rect width="10" height="10" x="1" y="13" fill="currentColor" rx="1"><animate id="svgSpinnersBlocksShuffle24" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle20.end" dur="0.2s" values="13;1"/><animate id="svgSpinnersBlocksShuffle25" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle21.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle26" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle22.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle27" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle23.end" dur="0.2s" values="13;1"/></rect></svg>
+                    </div>
                 ) : journals.length === 0 ? (
                     <div className="text-center py-4 text-gray-500">Anda belum membuat jurnal</div>
                 ) : (
@@ -406,10 +355,10 @@ const Jurnal = () => {
                         <tr key={journal.id} className="border-t">
                           <td className="py-2 px-4">
                           <div 
-                                className="max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap hover:cursor-help"
-                                title={journal.name}
+                              className="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap hover:cursor-help"
+                              title={journal.name}
                             >
-                                {journal.name}
+                              {journal.name}
                             </div>
                           </td>
                           <td className="py-2 px-4">

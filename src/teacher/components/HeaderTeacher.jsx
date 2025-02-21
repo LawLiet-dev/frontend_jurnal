@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Mail } from "lucide-react";
+import { useAuthStore } from "../../store/auth";
 
 function HeaderTeacher() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, logout } = useAuthStore();
   const [isNavbarFixed, setIsNavbarFixed] = useState(false);
   
   // Desktop states and refs
@@ -71,6 +74,11 @@ function HeaderTeacher() {
     setIsMobileProfileOpen(!isMobileProfileOpen);
   };
 
+  const logoutHandler = () => {
+    logout();
+    navigate('/');
+  };
+
   return (
     <div className="bg-gray-100 lg:px-20">
       {/* Header untuk Desktop */}
@@ -121,16 +129,19 @@ function HeaderTeacher() {
                       alt="Profile"
                     />
                     <div className="ml-4">
-                      <h5 className="text-lg font-semibold text-gray-800">Farel</h5>
-                      <span className="block text-gray-600 text-sm mb-1">RPL</span>
+                      <h5 className="text-lg font-semibold text-gray-800">{user?.name || 'User'}</h5>
+                      <span className="block text-gray-600 text-sm mb-1">{user?.role || 'Teacher'}</span>
                       <div className="flex items-center text-gray-600 text-sm">
                         <Mail className="w-4 h-4 mr-2" />
-                        Farel@gmail.com
+                        {user?.email || 'email@example.com'}
                       </div>
                     </div>
                   </div>
                   <div className="pt-4 space-y-2">
-                    <button className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium">
+                    <button 
+                      className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium"
+                      onClick={logoutHandler}
+                    >
                       Logout
                     </button>
                   </div>
@@ -141,24 +152,24 @@ function HeaderTeacher() {
         </header>
         <nav className="bg-white shadow-sm">
           <div className="container mx-auto flex space-x-4 py-2 px-6">
-            <a
-              href="teacher"
+            <Link
+              to="/teacher/*"
               className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
             >
               Dashboard
-            </a>
-            <a
-              href="siswa"
+            </Link>
+            <Link
+              to="/siswa/*"
               className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
             >
               siswa
-            </a>
+            </Link>
           </div>
         </nav>
       </div>
 
       {/* Header untuk Mobile & Tablet */}
-      <div className={`block md:hidden ${isNavbarFixed ? "py-2" : "py-4"}`}>
+      <div className={`md:hidden ${isNavbarFixed ? "py-2" : "py-4"}`}>
         <div className="flex justify-between items-center px-6">
           {/* Tombol Hamburger di kiri */}
           <div className="text-center">
@@ -203,21 +214,21 @@ function HeaderTeacher() {
                 <div className="py-4 overflow-y-auto">
                   <ul className="space-y-2 font-medium">
                     <li>
-                      <a href="teacher" className="flex items-center p-2 text-black rounded-lg hover:bg-blue-500 hover:text-white group">
+                      <Link to="/teacher/*" className="flex items-center p-2 text-black rounded-lg hover:bg-blue-500 hover:text-white group">
                         <svg className="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                           <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
                           <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
                         </svg>
                         <span className="ms-3">Dashboard</span>
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                        <a href="siswa" className="flex items-center p-2 text-black rounded-lg hover:bg-blue-500 group">
+                        <Link to="/siswa/*" className="flex items-center p-2 text-black rounded-lg hover:bg-blue-500 group">
                           <svg className="shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                               <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
                           </svg>
                           <span className="flex-1 ms-3 whitespace-nowrap">Siswa</span>
-                        </a>
+                        </Link>
                     </li>
                   </ul>
               </div>
@@ -257,16 +268,19 @@ function HeaderTeacher() {
                     alt="Profile"
                   />
                   <div className="ml-4">
-                    <h5 className="text-lg font-semibold text-gray-800">Farel</h5>
-                    <span className="block text-gray-600 text-sm mb-1">RPL</span>
+                    <h5 className="text-lg font-semibold text-gray-800">{user?.name || 'User'}</h5>
+                    <span className="block text-gray-600 text-sm mb-1">{user?.role || 'Teacher'}</span>
                     <div className="flex items-center text-gray-600 text-sm">
                       <Mail className="w-4 h-4 mr-2" />
-                      Farel@gmail.com
+                      {user?.email || 'email@example.com'}
                     </div>
                   </div>
                 </div>
                 <div className="pt-4 space-y-2">
-                  <button className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium">
+                  <button 
+                    className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium"
+                    onClick={logoutHandler}
+                  >
                     Logout
                   </button>
                 </div>

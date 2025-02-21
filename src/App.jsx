@@ -8,7 +8,7 @@ import About from './pages/About'
 import Teacher from './teacher/Teacher'
 import Siswa from './teacher/Siswa'
 import Student from './student/Student'
-import Jurnal from './student/jurnal'
+import Jurnal from './student/Jurnal'
 import List from './student/List'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useAuthStore } from './store/auth';
@@ -20,25 +20,6 @@ function App() {
 
   return (
     <div>
-     {/* <BrowserRouter> */}
-     {/* <Router>
-      <Routes> */}
-        {/* <Route path='/'  element={<Home/>}/>
-        <Route path='/home'  element={<Home/>}/>
-        <Route path='/contact'  element={<Contact/>}/>
-        <Route path='/about'  element={<About/>}/> */}
-        {/* <Route path='/register' element={<Register/>}/> */}
-        {/* <Route path='/reset' element={<Reset/>}/> */}
-        {/* <Route path='/login'  element={<Login/>}/>
-        <Route path='/teacher'  element={<Teacher/>}/>
-        <Route path='/siswa'  element={<Siswa/>}/>
-        <Route path='/student'  element={<Student/>}/>
-        <Route path='/jurnal'  element={<Jurnal/>}/>
-        <Route path='/list'  element={<List/>}/> */}
-      {/* </Routes> */}
-     {/* </BrowserRouter> */}
-    {/* //  </Router> */}
-     {/* <BrowserRouter> */}
      <Router>
             <Routes>
                 {/* Public routes */}
@@ -53,6 +34,7 @@ function App() {
                 {/* Protected routes */}
                 <Route element={<ProtectedRoute allowedRoles={['teacher']} />}>
                     <Route path="/teacher/*" element={<Teacher />} />
+                    <Route path="/siswa/*" element={<Siswa />} />
                 </Route>
                 
                 <Route element={<ProtectedRoute allowedRoles={['student']} />}>
