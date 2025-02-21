@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import HeaderTeacher from './components/HeaderTeacher';
+import HeaderTeacher from '../components/HeaderGuru';
 import Api from "../services/api";
 import Cookies from "js-cookie";
 
@@ -106,7 +106,7 @@ function Teacher() {
           <div className="container mx-auto flex justify-between w-11/12">
             
             {/* Collaborator Section */}
-            <div className="collaborator bg-white rounded-lg shadow-lg p-4 w-1/3">
+            <div className="collaborator bg-white rounded-lg shadow-lg p-4" style={{ width:"250px" }}>
               <h2 className="text-lg font-semibold mb-4">Collaborator</h2>
               {loading ? (
                 <LoadingSpinner />
@@ -174,19 +174,17 @@ function Teacher() {
                       {dudiData.map((student, index) => (
                         <div key={index} className="flex items-center">
                           <img 
-                            src="/assets/images/profile/user-7.jpg"
+                            src="/assets/images/profile/user-5.jpg"
                             alt={student.data.name} 
                             className="rounded-full w-12 h-12 mr-4" 
                           />
                           <div className="flex-grow">
                             <div className="font-bold">{student.data.name}</div>
-                            <div className="text-gray-600">
-                              Journals: {stats.journalsPerStudent[student.data.name] || 0}
-                            </div>
+                            <div className="text-gray-600">Journals: {stats.journalsPerStudent[student.data.name] || 0}</div>
                           </div>
-                          {/* <button className="bg-blue-500 text-white py-2 px-4 rounded-lg flex items-center"> */}
-                            {/* Detail <i className="fas fa-chevron-right ml-2"></i> */}
-                          {/* </button> */}
+                          {/* <button className="bg-blue-500 text-white py-2 px-4 rounded-lg flex items-center">
+                            Detail <i className="fas fa-chevron-right ml-2"></i>
+                          </button> */}
                         </div>
                       ))}
                     </div>

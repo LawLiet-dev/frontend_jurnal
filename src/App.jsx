@@ -9,6 +9,7 @@ import Teacher from './teacher/Teacher'
 import Siswa from './teacher/Siswa'
 import Student from './student/Student'
 import Jurnal from './student/Jurnal'
+import Journal from './teacher/Journal'
 import List from './student/List'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useAuthStore } from './store/auth';
@@ -35,6 +36,7 @@ function App() {
                 <Route element={<ProtectedRoute allowedRoles={['teacher']} />}>
                     <Route path="/teacher/*" element={<Teacher />} />
                     <Route path="/siswa/*" element={<Siswa />} />
+                    <Route path="/journal/*" element={<Journal />} />
                 </Route>
                 
                 <Route element={<ProtectedRoute allowedRoles={['student']} />}>

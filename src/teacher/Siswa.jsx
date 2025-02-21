@@ -1,170 +1,111 @@
-import React from 'react'
-import HeaderTeacher from './components/HeaderTeacher'
+import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
+import Api from '../services/api';
+import HeaderTeacher from '../components/HeaderGuru';
 
-function Siswa() {
+const Siswa = () => {
+  const [students, setStudents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchStudents = async () => {
+    const token = Cookies.get('token');
+
+    if (!token) {
+      setError('Token tidak tersedia. Silakan login kembali.');
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      Api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      const response = await Api.get('/api/mentor/student');
+      const transformedData = response.data.data.map(item => item.data);
+      setStudents(transformedData);
+      setIsLoading(false);
+    } catch (error) {
+      setError('Terjadi kesalahan saat mengambil data siswa.');
+      setIsLoading(false);
+      console.error('Error fetching students:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchStudents();
+  }, []);
+
   return (
     <div>
       <HeaderTeacher />
-      <div className="bg-white text-gray-800 lg:px-20">
-        <div className="container mx-auto p-4">
-          <div className="flex justify-between items-center mb-7 mt-3">
-            <h1 className="text-2xl font-bold lg:ml-4">
-            Jurnal Harian Siswa 
-            </h1>
+      
+      {/* Main Content */}
+      <main className="p-4">
+        <div className="max-w-7xl mx-auto">
+          {/* Page Header */}
+          <div className="mb-1">
+            <h1 className="text-2xl font-bold text-gray-900 " style={{ marginLeft:"45px" }}>Daftar Siswa</h1>
+            <p className="mt-1 text-sm text-gray-600" style={{ marginLeft:"45px" }}>
+              Pantau data siswa Anda
+            </p>
           </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white">
-          <thead>
-            <tr>
-            <th className="py-2 px-4">
-              Nama
-            </th>
-            <th className="py-2 px-4">
-              Image
-            </th>
-            <th className="py-2 px-4">
-              Kegiatan
-            </th>
-            <th className="py-2 px-4">
-              Deskripsi
-            </th>
-            <th className="py-2 px-4">
-              Tanggal
-            </th>
-            <th className="py-2 px-4">
-              Aksi
-            </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="border-t">
-            <td className="py-2 px-4">
-              Farel Lucky
-            </td>
-            <td className="py-2 px-4">
-              <img alt="Student activity image" className="w-12 h-12 object-cover" height="50" src="https://storage.googleapis.com/a1aa/image/W57rw0CQqo6dRPSH4WT8tEvkGlfScya_TmaXK0ky-9E.jpg" width="50"/>
-            </td>
-            <td className="py-2 px-4">
-              Lorem ipsum generator...
-            </td>
-            <td className="py-2 px-4">
-              Lorem ipsum generator...
-            </td>
-            <td className="py-2 px-4 text-blue-500">
-              01 Januari 2025
-            </td>
-            <td className="py-2 px-4">
-              <button className="bg-blue-500 text-white px-4 py-2 rounded">
-              Detail
-              </button>
-            </td>
-            </tr>
-            <tr className="border-t">
-            <td className="py-2 px-4">
-              Ihsan Adi Purnomo
-            </td>
-            <td className="py-2 px-4">
-              <img alt="Student activity image" className="w-12 h-12 object-cover" height="50" src="https://storage.googleapis.com/a1aa/image/W57rw0CQqo6dRPSH4WT8tEvkGlfScya_TmaXK0ky-9E.jpg" width="50"/>
-            </td>
-            <td className="py-2 px-4">
-              Lorem ipsum generator...
-            </td>
-            <td className="py-2 px-4">
-              Lorem ipsum generator...
-            </td>
-            <td className="py-2 px-4 text-blue-500">
-              01 Januari 2025
-            </td>
-            <td className="py-2 px-4">
-              <button className="bg-blue-500 text-white px-4 py-2 rounded">
-              Detail
-              </button>
-            </td>
-            </tr>
-            <tr className="border-t">
-            <td className="py-2 px-4">
-              Dandi Putra
-            </td>
-            <td className="py-2 px-4">
-              <img alt="Student activity image" className="w-12 h-12 object-cover" height="50" src="https://storage.googleapis.com/a1aa/image/W57rw0CQqo6dRPSH4WT8tEvkGlfScya_TmaXK0ky-9E.jpg" width="50"/>
-            </td>
-            <td className="py-2 px-4">
-              Lorem ipsum generator...
-            </td>
-            <td className="py-2 px-4">
-              Lorem ipsum generator...
-            </td>
-            <td className="py-2 px-4 text-blue-500">
-              01 Januari 2025
-            </td>
-            <td className="py-2 px-4">
-              <button className="bg-blue-500 text-white px-4 py-2 rounded">
-              Detail
-              </button>
-            </td>
-            </tr>
-            <tr className="border-t">
-            <td className="py-2 px-4">
-              Ahmad Zaini
-            </td>
-            <td className="py-2 px-4">
-              <img alt="Student activity image" className="w-12 h-12 object-cover" height="50" src="https://storage.googleapis.com/a1aa/image/W57rw0CQqo6dRPSH4WT8tEvkGlfScya_TmaXK0ky-9E.jpg" width="50"/>
-            </td>
-            <td className="py-2 px-4">
-              Lorem ipsum generator...
-            </td>
-            <td className="py-2 px-4">
-              Lorem ipsum generator...
-            </td>
-            <td className="py-2 px-4 text-blue-500">
-              01 Januari 2025
-            </td>
-            <td className="py-2 px-4">
-              <button className="bg-blue-500 text-white px-4 py-2 rounded">
-              Detail
-              </button>
-            </td>
-            </tr>
-            <tr className="border-t">
-            <td className="py-2 px-4">
-              Ahmad Zaini
-            </td>
-            <td className="py-2 px-4">
-              <img alt="Student activity image" className="w-12 h-12 object-cover" height="50" src="https://storage.googleapis.com/a1aa/image/W57rw0CQqo6dRPSH4WT8tEvkGlfScya_TmaXK0ky-9E.jpg" width="50"/>
-            </td>
-            <td className="py-2 px-4">
-              Lorem ipsum generator...
-            </td>
-            <td className="py-2 px-4">
-              Lorem ipsum generator...
-            </td>
-            <td className="py-2 px-4 text-blue-500">
-              01 Januari 2025
-            </td>
-            <td className="py-2 px-4">
-              <button className="bg-blue-500 text-white px-4 py-2 rounded">
-              Detail
-              </button>
-            </td>
-            </tr>
-          </tbody>
-          </table>
-        </div>
-        <div className="flex justify-center mt-4">
-          <a className="mx-2 text-blue-500" href="#">
-          1
-          </a>
-          <a className="mx-2 text-blue-500 font-bold" href="#">
-          2
-          </a>
-          <a className="mx-2 text-blue-500" href="#">
-          3
-          </a>
-        </div>
-        </div>
-      </div>
-    </div>
-  )
-}
 
-export default Siswa
+          {/* Card Container */}
+          <div>
+
+            {/* Card Content */}
+            <div className="px-6 py-4 container">
+              {isLoading ? (
+                <div className="flex flex-col justify-center items-center h-40 space-y-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><rect width="10" height="10" x="1" y="1" fill="currentColor" rx="1"><animate id="svgSpinnersBlocksShuffle20" fill="freeze" attributeName="x" begin="0;svgSpinnersBlocksShuffle27.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle21" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle24.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle22" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle25.end" dur="0.2s" values="13;1"/><animate id="svgSpinnersBlocksShuffle23" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle26.end" dur="0.2s" values="13;1"/></rect><rect width="10" height="10" x="1" y="13" fill="currentColor" rx="1"><animate id="svgSpinnersBlocksShuffle24" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle20.end" dur="0.2s" values="13;1"/><animate id="svgSpinnersBlocksShuffle25" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle21.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle26" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle22.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle27" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle23.end" dur="0.2s" values="13;1"/></rect></svg>
+                  <div className="text-sm text-gray-500">
+                    Mohon tunggu sebentar...
+                  </div>
+                </div>
+              ) : error ? (
+                <div className="text-center py-8 text-red-500">
+                  {error}
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left">
+                    <thead>
+                      <tr className="bg-gray-50">
+                        <th className="px-4 py-3 text-sm font-medium text-gray-700">Nama</th>
+                        <th className="px-4 py-3 text-sm font-medium text-gray-700">NISN</th>
+                        <th className="px-4 py-3 text-sm font-medium text-gray-700">Email</th>
+                        <th className="px-4 py-3 text-sm font-medium text-gray-700">Guru</th>
+                        <th className="px-4 py-3 text-sm font-medium text-gray-700">DUDI</th>
+                        <th className="px-4 py-3 text-sm font-medium text-gray-700">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      {students.map((student) => (
+                        <tr key={student.id} className="hover:bg-gray-50">
+                          <td className="px-4 py-4 text-sm text-gray-900">{student.name}</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">{student.nisn}</td>
+                          <td className="px-4 py-4 text-sm text-blue-500">{student.email}</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">{student.name_teacher}</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">{student.dudi_name}</td>
+                          <td className="px-4 py-4 text-sm">
+                            <button 
+                              className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded text-sm transition-colors"
+                              onClick={() => {/* Handle detail view */}}
+                            >
+                              Detail
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default Siswa;
