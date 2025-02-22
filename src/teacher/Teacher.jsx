@@ -103,11 +103,11 @@ function Teacher() {
       
       <div className="hidden md:block">
         <div className="bg-white flex justify-center items-start min-h-screen py-4 lg:px-10">
-          <div className="container mx-auto flex justify-between w-11/12">
+          <div className="mx-auto flex justify-between w-11/12">
             
             {/* Collaborator Section */}
-            <div className="collaborator bg-white rounded-lg shadow-lg p-4" style={{ width:"250px" }}>
-              <h2 className="text-lg font-semibold mb-4">Collaborator</h2>
+            <div className="collaborator bg-white p-4" style={{ width:"350px" }}>
+              <h2 className="text-lg font-semibold mb-4 rounded-full h-8 text-center pt-1" style={{ width:"150px", backgroundColor:"#F0F2F5", color:"#121417" }}>Collaborator</h2>
               {loading ? (
                 <LoadingSpinner />
               ) : uniqueDudiNames.length > 0 ? (
@@ -134,7 +134,15 @@ function Teacher() {
             </div>
 
             {/* Statistics Section */}
-            <div className="bg-white rounded-lg shadow-lg w-4/5 max-w-4xl">
+            <div 
+            style={{
+              borderRight: "7px solid #3B82F6", 
+              borderBottom: "7px solid #3B82F6",
+              borderLeft: "7px solid #3B82F6",
+              borderRadius: "10px"
+            }} 
+            className="bg-white rounded-lg w-4/5 max-w-4xl"
+            >
               <div className="bg-blue-500 text-white p-4 rounded-t-lg text-lg">
                 Statistik Jurnal
               </div>
@@ -151,7 +159,7 @@ function Teacher() {
                       <div className="bg-blue-100 text-blue-500 text-center py-2 px-4 rounded-lg w-16">
                         {journalData.length}X
                       </div>
-                      <button className="bg-blue-500 text-white py-2 px-4 rounded-lg flex items-center">
+                      <button className="text-white py-2 px-4 rounded-lg flex items-center" style={{ backgroundColor:"#2563EB" }}>
                         Detail <i className="fas fa-chevron-right ml-2"></i>
                       </button>
                     </div>
@@ -164,7 +172,7 @@ function Teacher() {
                       <div className="bg-blue-100 text-blue-500 text-center py-2 px-4 rounded-lg w-16 mr-[20px]">
                         {stats.studentsWithoutTodayJournal}X
                       </div>
-                      <button className="bg-blue-500 text-white py-2 px-4 rounded-lg flex items-center">
+                      <button className="bg-blue-500 text-white py-2 px-4 rounded-lg flex items-center" style={{ backgroundColor:"#2563EB" }}>
                         Detail <i className="fas fa-chevron-right ml-2"></i>
                       </button>
                     </div>
@@ -195,6 +203,104 @@ function Teacher() {
           </div>
         </div>
       </div>
+
+      <div className="md:hidden">
+      <div className="bg-white flex justify-center items-start min-h-screen py-4 lg:px-10">
+        <div className="mx-auto flex flex-col md:flex-row justify-between w-11/12">
+          
+          {/* Collaborator Section */}
+          <div className="collaborator bg-white p-4 w-full md:w-[350px] mb-10">
+            <h2 className="text-lg font-semibold mb-4 rounded-full h-8 text-center pt-1 w-[150px] bg-gray-200 text-gray-900">
+              Collaborator
+            </h2>
+            {loading ? (
+              <LoadingSpinner />
+            ) : uniqueDudiNames.length > 0 ? (
+              uniqueDudiNames.map((dudiName, index) => (
+                <div key={index} className="collaborator-item flex items-center mb-2">
+                  <img 
+                    alt={dudiName} 
+                    className="rounded-full w-10 h-10 mr-2" 
+                    src="/assets/images/profile/user-4.jpg"
+                    width="40" 
+                    height="40" 
+                  />
+                  <div className="info flex-grow">
+                    <p className="name font-bold">{dudiName}</p>
+                  </div>
+                  <div className="arrow text-gray-500">
+                    <i className="fas fa-chevron-right"></i>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-center text-gray-500">No collaborators found</p>
+            )}
+          </div>
+
+          {/* Statistics Section */}
+          <div 
+            className="bg-white rounded-lg w-full md:w-4/5 max-w-4xl border-4 border-blue-500"
+          >
+            <div className="bg-blue-500 text-white p-4 rounded-t-lg text-lg">
+              Statistik Jurnal
+            </div>
+            <div className="p-6">
+              {loading ? (
+                <LoadingSpinner />
+              ) : (
+                <>
+                  <div className="flex justify-between items-center mb-6">
+                    <div className="text-left">
+                      <span className="block text-gray-600">Total Jurnal</span>
+                      <span className="block text-gray-600">Terisi</span>
+                    </div>
+                    <div className="bg-blue-100 text-blue-500 text-center py-2 px-4 rounded-lg w-16 ml-5">
+                      {journalData.length}X
+                    </div>
+                    <button className="bg-blue-500 text-white py-2 px-4 rounded-lg flex items-center">
+                      Detail <i className="fas fa-chevron-right ml-2"></i>
+                    </button>
+                  </div>
+
+                  <div className="flex justify-between items-center mb-6">
+                    <div className="text-left">
+                      <span className="block text-gray-600">Belum mengisi</span>
+                      <span className="block text-gray-600">Journal Hari Ini</span>
+                    </div>
+                    <div className="bg-blue-100 text-blue-500 text-center py-2 px-4 rounded-lg w-16">
+                      {stats.studentsWithoutTodayJournal}X
+                    </div>
+                    <button className="bg-blue-500 text-white py-2 px-4 rounded-lg flex items-center">
+                      Detail <i className="fas fa-chevron-right ml-2"></i>
+                    </button>
+                  </div>
+
+                  {/* Student List */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    {dudiData.map((student, index) => (
+                      <div key={index} className="flex items-center mt-5">
+                        <img 
+                          src="/assets/images/profile/user-5.jpg"
+                          alt={student.data.name} 
+                          className="rounded-full w-12 h-12 mr-4" 
+                        />
+                        <div className="flex-grow">
+                          <div className="font-bold">{student.data.name}</div>
+                          <div className="text-gray-600">
+                            Journals: {stats.journalsPerStudent[student.data.name] || 0}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+     </div>
     </div>
   );
 }

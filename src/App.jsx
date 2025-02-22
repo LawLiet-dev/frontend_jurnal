@@ -11,6 +11,7 @@ import Student from './student/Student'
 import Jurnal from './student/Jurnal'
 import Journal from './teacher/Journal'
 import List from './student/List'
+import Custom404 from './errors/404'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useAuthStore } from './store/auth';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/403" element={<AccessDenied />} />
+                <Route path="*" element={<Custom404 />} />
                 
                 {/* Protected routes */}
                 <Route element={<ProtectedRoute allowedRoles={['teacher']} />}>

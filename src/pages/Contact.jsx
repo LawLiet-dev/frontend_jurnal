@@ -1,9 +1,56 @@
-import React from "react";
+import React, { useState } from 'react';
+import emailjs from '@emailjs/browser'
 import HeaderLanding from "../components/HeaderLanding";
 import Footer from "../components/Footer";
 import CursorFollower from "../components/CursorFollower.jsx";
 
 function Contact() {
+  emailjs.init("E0dvFHf3hiw9H8Gxb");
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const [status, setStatus] = useState({
+    message: '',
+    isError: false
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [id]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus({ message: 'Sending...', isError: false });
+
+    try {
+      const templateParams = {
+        to_email: 'ilhamadipurnomo55@gmail.com',
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message
+      };
+
+      // Replace these with your actual EmailJS credentials
+      await emailjs.send(
+        'service_xvlv5vc',
+        'template_vjep8gq',
+        templateParams,
+        'E0dvFHf3hiw9H8Gxb'
+      );
+
+      setStatus({ message: 'Message sent successfully!', isError: false });
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      setStatus({ message: 'Failed to send message. Please try again.', isError: true });
+    }
+  };
   return (
     <div>
       <CursorFollower />
@@ -58,7 +105,7 @@ function Contact() {
                     <p className="mb-12 text-base/6">
                       Silahkan isi formulir berikut, dan kami akan menghubungi anda kembali.
                     </p>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <div className="w-full">
                         <div className="mb-5">
                           <label
@@ -66,11 +113,20 @@ function Contact() {
                             className="block text-sm font-medium mb-1 text-default-600">
                             Name <span className="text-red-500">*</span>
                           </label>
+                          {/* <input
+                            type="text"
+                            className="py-2 px-4 leading-6 block w-full border-default-300 rounded text-sm focus:border-default-300 focus:ring-0"
+                            id="name"
+                            placeholder="Your Name"
+                          /> */}
                           <input
                             type="text"
                             className="py-2 px-4 leading-6 block w-full border-default-300 rounded text-sm focus:border-default-300 focus:ring-0"
                             id="name"
                             placeholder="Your Name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
                           />
                         </div>
                         <div className="mb-5">
@@ -79,11 +135,20 @@ function Contact() {
                             className="block text-sm font-medium mb-1 text-default-600">
                             Email <span className="text-red-500">*</span>
                           </label>
+                          {/* <input
+                            type="email"
+                            className="py-2 px-4 leading-6 block w-full border-default-300 rounded text-sm focus:border-default-300 focus:ring-0"
+                            id="email"
+                            placeholder="Your Email"
+                          /> */}
                           <input
                             type="email"
                             className="py-2 px-4 leading-6 block w-full border-default-300 rounded text-sm focus:border-default-300 focus:ring-0"
                             id="email"
                             placeholder="Your Email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
                           />
                         </div>
                         <div className="mb-5">
@@ -92,12 +157,26 @@ function Contact() {
                             className="block text-sm font-medium mb-1 text-default-600">
                             Message <span className="text-red-500">*</span>
                           </label>
-                          <textarea
+                          {/* <textarea
                             className="py-2 px-4 leading-6 block w-full border-default-300 rounded text-sm focus:border-default-300 focus:ring-0"
                             id="message"
                             rows="4"
-                            placeholder="Type Your Message..."></textarea>
+                            placeholder="Type Your Message..."></textarea> */}
+                            <textarea
+                              className="py-2 px-4 leading-6 block w-full border-default-300 rounded text-sm focus:border-default-300 focus:ring-0"
+                              id="message"
+                              rows="4"
+                              placeholder="Type Your Message..."
+                              value={formData.message}
+                              onChange={handleChange}
+                              required
+                            ></textarea>
                         </div>
+                        {/* {status.message && (
+                          <div className={`mb-4 p-2 rounded ${status.isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
+                            {status.message}
+                          </div>
+                        )} */}
                       </div>
                       <button
                         type="submit"

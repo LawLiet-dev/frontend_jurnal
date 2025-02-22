@@ -135,7 +135,7 @@ const Student = () => {
   return (
     <div>
       <HeaderSiswa />
-      <div className="bg-gray-100 min-h-screen">
+      <div className="min-h-screen">
         <div className="container mx-auto p-4">
           <div className="flex flex-col lg:flex-row gap-4">
             <div className="bg-white p-6 rounded-lg shadow-lg flex-1">

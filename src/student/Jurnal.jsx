@@ -234,13 +234,16 @@ const Jurnal = () => {
   return (
     <div>
       <HeaderSiswa />
-      <div className="bg-gray-100 p-4">
+      <div className="bg-white p-4">
         <div className="mx-auto container">
           <div className="flex flex-col lg:flex-row">
             {/* Form Section */}
-            <div className="w-full bg-white p-6 rounded-lg shadow-md mb-6 lg:mb-0" style={{ width:"500px" }}>
-             <h2 text-xl text-gray-600 font-bold style={{ marginBottom:"10px" }}>Form Jurnal {nameStatus.studentsName}</h2>
-            <Toaster position="top-right" />
+            <div className="w-full lg:!w-[500px] bg-white p-6 rounded-lg shadow-md mb-6 lg:mb-0">
+            {/* style={{ width:"500px" }} */}
+              <h1 className="text-gray-600 font-bold" style={{ marginBottom: "10px", fontSize: "24px", fontWeight: "700" }}>
+                Form Jurnal {nameStatus.studentsName}
+              </h1>
+              <Toaster position="top-right" />
               <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <label className="block text-gray-700" htmlFor="tanggal">Tanggal</label>
@@ -294,7 +297,7 @@ const Jurnal = () => {
                     <p className="text-red-500 text-sm mt-1">{errors.name[0]}</p>
                 )}
                 </div>
-                <div className="mb-25">
+                <div className="mb-15">
                   <label className="block text-gray-700" htmlFor="deskripsi">Deskripsi</label>
                   <textarea 
                     className={`w-full border ${errors.description ? 'border-red-500' : 'border-gray-300'} p-2 rounded`}
@@ -331,11 +334,14 @@ const Jurnal = () => {
             </div>
 
             {/* Table Section */}
-            <div className="w-full bg-white p-6 rounded-lg shadow-md md:ml-9 md:h-[475px] overflow-x-auto">
+            <div className="w-full bg-white p-6 rounded-lg shadow-md md:ml-9 md:h-[448px] overflow-x-auto">
                 {tableLoading ? (
                     // <div className="text-center py-4">Loading...</div>
                     <div className="flex flex-col justify-center items-center h-30">
                       <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><rect width="10" height="10" x="1" y="1" fill="currentColor" rx="1"><animate id="svgSpinnersBlocksShuffle20" fill="freeze" attributeName="x" begin="0;svgSpinnersBlocksShuffle27.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle21" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle24.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle22" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle25.end" dur="0.2s" values="13;1"/><animate id="svgSpinnersBlocksShuffle23" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle26.end" dur="0.2s" values="13;1"/></rect><rect width="10" height="10" x="1" y="13" fill="currentColor" rx="1"><animate id="svgSpinnersBlocksShuffle24" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle20.end" dur="0.2s" values="13;1"/><animate id="svgSpinnersBlocksShuffle25" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle21.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle26" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle22.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle27" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle23.end" dur="0.2s" values="13;1"/></rect></svg>
+                      <div className="text-sm text-gray-500">
+                        Mohon tunggu sebentar...
+                      </div>
                     </div>
                 ) : journals.length === 0 ? (
                     <div className="text-center py-4 text-gray-500">Anda belum membuat jurnal</div>

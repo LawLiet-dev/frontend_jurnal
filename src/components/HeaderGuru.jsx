@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation  } from "react-router-dom";
 import { Mail } from "lucide-react";
 import { useAuthStore } from "../store/auth";
 
 function HeaderTeacher() {
+  const location = useLocation();
   const { user, logout } = useAuthStore();
   const [isNavbarFixed, setIsNavbarFixed] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -84,16 +85,16 @@ function HeaderTeacher() {
   };
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-white">
       {/* Header untuk Desktop */}
       <div className="hidden md:block">
-        <header className="bg-white shadow-sm">
-          <div className="container mx-auto flex justify-between items-center py-4 px-6">
+        <header className="bg-white shadow-lg border-b border-gray-200 relative z-10">
+          <div className="container mx-auto flex justify-between items-center py-2 px-6">
             <div className="flex items-center">
               <img
                 src="/assets/images/smk.png"
                 alt="Logo SMKN 1 Kraksaan"
-                className="w-12 h-12"
+                className="w-12 h-30"
               />
               <h1 className="text-xl font-semibold text-black">
                 PKL SMKN 1 <span className="text-blue-500">KRAKSAAN</span>
@@ -158,23 +159,38 @@ function HeaderTeacher() {
             </div>
           </div>
         </header>
-        <nav className="bg-white shadow-sm">
+        <nav className="bg-white shadow-sm mt-2">
           <div className="container mx-auto flex space-x-4 py-2 px-6">
             <Link
               to="/teacher/*"
-              className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
+              // className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
+              className={`px-4 py-2 ${
+                location.pathname.includes("/teacher")
+                  ? "shadow-lg bg-blue-500 text-white rounded-lg"
+                  : "text-gray-600"
+              } hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg`}
             >
               Dashboard
             </Link>
             <Link
               to="/siswa/*"
-              className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
+              // className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
+              className={`px-4 py-2 ${
+                location.pathname.includes("/siswa")
+                  ? "shadow-lg bg-blue-500 text-white rounded-lg"
+                  : "text-gray-600"
+              } hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg`}
             >
               Siswa
             </Link>
             <Link
               to="/journal/*"
-              className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
+              // className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
+              className={`px-4 py-2 ${
+                location.pathname.includes("/journal")
+                  ? "shadow-lg bg-blue-500 text-white rounded-lg"
+                  : "text-gray-600"
+              } hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg`}
             >
               jurnal
             </Link>

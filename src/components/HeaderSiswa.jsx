@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { Mail } from "lucide-react";
 import Select from "react-select";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation  } from "react-router-dom";
 import Cookies from "js-cookie";
 import Api from "../services/api"
 import { useAuthStore } from "../store/auth";
 
 function HeaderSiswa() {
+  const location = useLocation();
   const [isNavbarFixed, setIsNavbarFixed] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { user, logout } = useAuthStore();
@@ -244,16 +245,16 @@ function HeaderSiswa() {
   };
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-white">
       {/* Header untuk Desktop */}
       <div className="hidden md:block">
-        <header className="bg-white shadow-sm">
-          <div className="container mx-auto flex justify-between items-center py-4 px-6">
+        <header className="bg-white shadow-lg border-b border-gray-200 relative z-10">
+          <div className="container mx-auto flex justify-between items-center py-2 px-6">
             <div className="flex items-center">
               <img
                 src="/assets/images/smk.png"
                 alt="Logo SMKN 1 Kraksaan"
-                className="w-12 h-12"
+                className="w-12 h-30"
               />
               <h1 className="text-xl font-semibold text-black">
                 PKL SMKN 1 <span className="text-blue-500">KRAKSAAN</span>
@@ -326,17 +327,27 @@ function HeaderSiswa() {
         </header>
         
         {/* Navigation */}
-        <nav className="bg-white shadow-sm container">
+        <nav className="bg-white mt-1">
           <div className="container mx-auto flex space-x-4 py-2 px-6">
             <Link
               to="/student/*"
-              className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
+              // className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
+              className={`px-4 py-2 ${
+                location.pathname.includes("/student")
+                  ? "shadow-lg bg-blue-500 text-white rounded-lg"
+                  : "text-gray-600"
+              } hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg`}
             >
               Dashboard
             </Link>
             <Link
               to="/jurnal/*"
-              className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
+              // className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
+              className={`px-4 py-2 ${
+                location.pathname.includes("/jurnal")
+                  ? "shadow-lg bg-blue-500 text-white rounded-lg"
+                  : "text-gray-600"
+              } hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg`}
             >
               jurnal
             </Link>
@@ -352,7 +363,7 @@ function HeaderSiswa() {
       </div>
 
       {/* Settings Modal */}
-      {isSettingsModalOpen && ( 
+      {/* {isSettingsModalOpen && ( 
       <div className="fixed inset-0 flex items-center justify-center bg-gray-50 bg-opacity-50 z-50">
         <div className="bg-white p-8 rounded-lg shadow-lg w-1/4 relative" ref={modalRef}>
           <button 
@@ -422,7 +433,81 @@ function HeaderSiswa() {
           </div>
         </div>
       </div>
-    )}
+    )} */}
+      {isSettingsModalOpen && ( 
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-900/30 backdrop-blur-md z-50">
+          <div 
+            className="bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-md relative"
+            ref={modalRef}
+          >
+            <button 
+              onClick={handleCloseSettingsModal}
+              className="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+            
+            <div className="mb-4 text-center">
+              <img
+                src="/assets/images/smk.png"
+                alt="Settings Icon"
+                className="w-20 h-20 mx-auto mb-4"
+              />
+            </div>
+
+            {errors.api && (
+              <div className="mb-4 p-2 bg-red-100 text-red-600 rounded">
+                {errors.api}
+              </div>
+            )}
+
+            <div className="mb-4">
+              <label htmlFor="dudi-select" className="block text-sm font-medium text-gray-600 mb-2">
+                Pilih Dudi Anda
+              </label>
+              <Select
+                id="dudi-select"
+                options={dudiOptions}
+                value={selectedDudi}
+                onChange={setSelectedDudi}
+                placeholder="Pilih Dudi"
+                isSearchable
+                className={errors.dudi ? "border-red-500" : ""}
+              />
+              {errors.dudi && <span className="text-red-500 text-sm">{errors.dudi}</span>}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="pembimbing-select" className="block text-sm font-medium text-gray-600 mb-2">
+                Pilih Pembimbing Anda
+              </label>
+              <Select
+                id="pembimbing-select"
+                options={teacherOptions}
+                value={selectedTeacher}
+                onChange={setSelectedTeacher}
+                placeholder="Pilih Pembimbing"
+                isSearchable
+                className={errors.teacher ? "border-red-500" : ""}
+              />
+              {errors.teacher && <span className="text-red-500 text-sm">{errors.teacher}</span>}
+            </div>
+
+            <div className="flex space-x-4 mt-5">
+              <button
+                onClick={handleSaveSettings}
+                className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
+                disabled={!selectedDudi || !selectedTeacher}
+              >
+                Simpan Pilihan
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Header untuk Mobile & Tablet */}
       <div className={`md:hidden ${isNavbarFixed ? "py-2" : "py-4"}`}>

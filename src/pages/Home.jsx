@@ -71,18 +71,18 @@ function Home() {
                 mereka.
               </p>
               <div className="flex flex-wrap items-center gap-5">
-                <a
-                  href="#"
+                <Link
+                  to="/register"
                   className="py-3 px-6 flex items-center rounded border border-black text-white bg-black hover:shadow-lg hover:shadow-black/50 focus:outline focus:outline-black/50 transition-all duration-500">
                   <i className="i-fa6-solid-arrow-down me-2"></i>{" "}
                   Bergabung
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="/about"
                   className="py-3 px-6 rounded border border-black hover:border-black hover:bg-black hover:text-white hover:shadow-lg hover:shadow-black/50 focus:outline focus:outline-black/50 transition-all duration-500">
                   About
                   Us
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -387,23 +387,23 @@ function Home() {
             data-aos="fade-up"
             data-aos-duration="1000">
             <img
-              src="assets/images/brands/amazon.svg"
+              src="assets/images/brands/onlenkan.png"
               className="w-28"
             />
             <img
-              src="assets/images/brands/google.svg"
+              src="assets/images/brands/telkom.svg"
               className="w-28"
             />
             <img
-              src="assets/images/brands/paypal.svg"
+              src="assets/images/brands/Alfamart.png"
               className="w-28"
             />
             <img
-              src="assets/images/brands/spotify.svg"
+              src="assets/images/brands/kominfo.svg"
               className="w-28"
             />
             <img
-              src="assets/images/brands/shopify.svg"
+              src="assets/images/brands/J&T.svg"
               className="w-28"
             />
           </div>
@@ -413,7 +413,7 @@ function Home() {
         </div> */}
       </section>
 
-      <section className="py-20">
+      {/* <section className="py-20">
         <div className="container">
           <div className="text-center">
             <span className="text-sm font-medium py-1 px-3 rounded-full text-primary bg-primary/10">
@@ -643,7 +643,7 @@ function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <Footer />
     </div>
