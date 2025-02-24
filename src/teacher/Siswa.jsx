@@ -10,6 +10,8 @@ const Siswa = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   const fetchStudents = async () => {
     const token = Cookies.get('token');
@@ -37,6 +39,17 @@ const Siswa = () => {
     fetchStudents();
   }, []);
 
+  // Get current items
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = students.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Calculate total pages
+  const totalPages = Math.ceil(students.length / itemsPerPage);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div>
       <HeaderTeacher />
@@ -46,23 +59,16 @@ const Siswa = () => {
         <div className="max-w-7xl mx-auto">
           {/* Page Header */}
           <div className="md:hidden">
-          <div className="mb-1">
-            <h1 className="text-2xl font-bold text-gray-900 " style={{ marginLeft:"10px" }} >Daftar Siswa</h1>
-            <p className="mt-1 text-sm text-gray-600" style={{ marginLeft:"10px" }}>
-              Pantau data siswa Anda
-            </p>
+            <div className="mb-1">
+              <h1 className="text-2xl font-bold text-gray-900" style={{ marginLeft:"10px" }}>Daftar Siswa</h1>
+              <p className="mt-1 text-sm text-gray-600" style={{ marginLeft:"10px" }}>
+                Pantau data siswa Anda
+              </p>
+            </div>
           </div>
-          </div>
-          {/* <div className="mb-1">
-            <h1 className="text-2xl font-bold text-gray-900 " style={{ marginLeft:"45px" }}>Daftar Siswa</h1>
-            <p className="mt-1 text-sm text-gray-600" style={{ marginLeft:"45px" }}>
-              Pantau data siswa Anda
-            </p>
-          </div> */}
 
           {/* Card Container */}
           <div>
-
             {/* Card Content */}
             <div className="px-6 py-4 lg:container">
               {isLoading ? (
@@ -77,49 +83,82 @@ const Siswa = () => {
                   {error}
                 </div>
               ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left">
-                    <thead>
-                      <tr className="">
-                        <th className="px-12 py-3 text-sm font-medium text-gray-700">Nama</th>
-                        <th className="px-12 py-3 text-sm font-medium text-gray-700">NISN</th>
-                        <th className="px-12 py-3 text-sm font-medium text-gray-700">Email</th>
-                        {/* <th className="px-4 py-3 text-sm font-medium text-gray-700">Guru</th> */}
-                        {/* <th className="px-12 py-3 text-sm font-medium text-gray-700">DUDI</th> */}
-                        <th className="px-12 py-3 text-sm font-medium text-gray-700">Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200">
-                      {students.map((student) => (
-                        <tr key={student.id} className="hover:bg-gray-50">
-                          <td className="px-12 py-4 text-sm text-gray-600">{student.name}</td>
-                          <td className="px-12 py-4 text-sm text-blue-500">{student.nisn}</td>
-                          <td className="px-12 py-4 text-sm text-gray-900">{student.email}</td>
-                          {/* <td className="px-4 py-4 text-sm text-gray-600">{student.name_teacher}</td> */}
-                          {/* <td className="px-12 py-4 text-sm text-gray-600">{student.dudi_name}</td> */}
-                          <td className="px-12 py-4 text-sm">
-                            <button 
-                              className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded text-sm transition-colors"
-                              onClick={() => {
-                                setSelectedStudentId(student.id);
-                                setIsModalOpen(true);
-                              }}
-                            >
-                              Detail
-                            </button>
-                          </td>
+                <>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left">
+                      <thead>
+                        <tr className="">
+                          <th className="px-12 py-3 text-sm font-medium text-gray-700">Nama</th>
+                          <th className="px-12 py-3 text-sm font-medium text-gray-700">NISN</th>
+                          <th className="px-12 py-3 text-sm font-medium text-gray-700">Email</th>
+                          <th className="px-12 py-3 text-sm font-medium text-gray-700">Aksi</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                      </thead>
+                      <tbody className="divide-y divide-gray-200">
+                        {currentItems.map((student) => (
+                          <tr key={student.id} className="hover:bg-gray-50">
+                            <td className="px-12 py-4 text-sm text-gray-600">{student.name}</td>
+                            <td className="px-12 py-4 text-sm text-blue-500">{student.nisn}</td>
+                            <td className="px-12 py-4 text-sm text-gray-900">{student.email}</td>
+                            <td className="px-12 py-4 text-sm">
+                              <button 
+                                className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded text-sm transition-colors"
+                                onClick={() => {
+                                  setSelectedStudentId(student.id);
+                                  setIsModalOpen(true);
+                                }}
+                              >
+                                Detail
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Pagination */}
+                  <div className="flex justify-between items-center mt-6 px-4">
+                    <button
+                      onClick={() => paginate(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className={`px-4 py-2 rounded ${
+                        currentPage === 1
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-blue-500 text-white hover:bg-blue-600'
+                      }`}
+                    >
+                      Previous
+                    </button>
+
+                    <div className="text-center text-gray-600">
+                      Page {currentPage} of {totalPages}
+                    </div>
+
+                    <button
+                      onClick={() => paginate(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                      className={`px-4 py-2 rounded ${
+                        currentPage === totalPages
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-blue-500 text-white hover:bg-blue-600'
+                      }`}
+                    >
+                      Next
+                    </button>
+                  </div>
+
+                  {/* <div className="text-center mt-4 text-sm text-gray-500">
+                    Menampilkan {indexOfFirstItem + 1} - {Math.min(indexOfLastItem, students.length)} dari {students.length} data
+                  </div> */}
+                </>
               )}
             </div>
             <StudentJournalModal
-                studentId={selectedStudentId}
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-              />
+              studentId={selectedStudentId}
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+            />
           </div>
         </div>
       </main>

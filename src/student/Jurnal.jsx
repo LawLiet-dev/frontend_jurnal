@@ -241,7 +241,7 @@ const Jurnal = () => {
             <div className="w-full lg:!w-[500px] bg-white p-6 rounded-lg shadow-md mb-6 lg:mb-0">
             {/* style={{ width:"500px" }} */}
               <h1 className="text-gray-600 font-bold" style={{ marginBottom: "10px", fontSize: "24px", fontWeight: "700" }}>
-                Form Jurnal {nameStatus.studentsName}
+                Pengisian Jurnal {nameStatus.studentsName}
               </h1>
               <Toaster position="top-right" />
               <form onSubmit={handleSubmit}>

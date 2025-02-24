@@ -7,8 +7,10 @@ import "../../public/assets/css/teacher.css";
 
 function About() {
   return (
-    <div>
-      <CursorFollower />
+    <div className="overflow-hidden">
+      <div className="block md:hidden">
+        <CursorFollower />
+      </div>
       <HeaderLanding backgroundColor="#fff" />
 
       <section className="py-44 relative">

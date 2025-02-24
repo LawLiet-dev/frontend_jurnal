@@ -7,8 +7,10 @@ import "../../public/assets/css/teacher.css";
 
 function Home() {
   return (
-    <div>
-      <CursorFollower />
+    <div className="overflow-hidden">
+      <div className="block md:hidden">
+        <CursorFollower />
+      </div>
       <HeaderLanding backgroundColor="#FEFAF2" />
 
       <section className="py-44 relative bg-amber-500/5">

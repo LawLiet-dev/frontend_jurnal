@@ -3,25 +3,65 @@ import { Link, useLocation } from "react-router-dom";
 
 function HeaderLanding({ backgroundColor }) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const location = useLocation();
     
     // Tutup mobile menu ketika path berubah
     useEffect(() => {
         setIsMobileMenuOpen(false);
     }, [location]);
+    
+    // Track scroll position and window width
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrollPosition(window.pageYOffset);
+        };
+        
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+        
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleResize);
+        
+        // Apply overflow-x: hidden to prevent horizontal scrolling
+        document.documentElement.style.overflowX = 'hidden';
+        document.body.style.overflowX = 'hidden';
+        
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleResize);
+            document.documentElement.style.overflowX = '';
+            document.body.style.overflowX = '';
+        };
+    }, [windowWidth]);
 
     // Handle toggle mobile menu
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
+    
+    // Dynamic navbar height based on scroll position and screen size
+    const getNavbarWidth = () => {
+        if (windowWidth < 768) {
+            return scrollPosition > 50 ? "380px" : "380px";
+        }
+        return "auto";
+    };
 
     return (
-        <div>
+        <div className="overflow-hidden w-full">
             <div id="navbar"
-                style={{ backgroundColor }}
+                style={{ 
+                    backgroundColor,
+                    width: "100%",
+                    width: getNavbarWidth(),
+                    overflowX: "hidden"
+                }}
                 className="fixed top-0 inset-x-0 flex items-center z-99 w-full transition-all py-2">
-                <div className="container">
-                    <nav className="flex items-center">
+                <div className="container mx-auto max-w-screen-xl">
+                    <nav className="flex items-center w-full">
                         <div className="flex items-center">
                             <Link to="/" >
                                 <img src="/assets/images/smk.png" alt="Logo SMKN 1 Kraksaan" className="w-12 h-20" />
@@ -64,7 +104,6 @@ function HeaderLanding({ backgroundColor }) {
                     </nav>
                 </div>
             </div>
-
             {/* Mobile Menu Overlay */}
             {isMobileMenuOpen && (
                 <div 
@@ -74,7 +113,7 @@ function HeaderLanding({ backgroundColor }) {
             )}
 
             {/* Mobile Menu */}
-            <div className={`fixed top-0 start-0 transition-transform duration-300 transform h-full max-w-xs w-full z-[80] bg-white border-e ${
+            <div className={`fixed top-0 start-0 transition-transform duration-300 transform h-full max-w-xs w-full z-[99] bg-white border-e ${
                 isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
             }`}>
                 <div>

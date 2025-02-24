@@ -7,6 +7,8 @@ const Journal = () => {
   const [journals, setJournals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   const fetchJournals = async () => {
     const token = Cookies.get('token');
@@ -39,6 +41,17 @@ const Journal = () => {
     fetchJournals();
   }, []);
 
+  // Get current items
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = journals.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Calculate total pages
+  const totalPages = Math.ceil(journals.length / itemsPerPage);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div>
       <HeaderTeacher />
@@ -62,7 +75,7 @@ const Journal = () => {
             <div className="flex flex-col justify-center items-center h-40 space-y-4">
               <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><rect width="10" height="10" x="1" y="1" fill="currentColor" rx="1"><animate id="svgSpinnersBlocksShuffle20" fill="freeze" attributeName="x" begin="0;svgSpinnersBlocksShuffle27.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle21" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle24.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle22" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle25.end" dur="0.2s" values="13;1"/><animate id="svgSpinnersBlocksShuffle23" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle26.end" dur="0.2s" values="13;1"/></rect><rect width="10" height="10" x="1" y="13" fill="currentColor" rx="1"><animate id="svgSpinnersBlocksShuffle24" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle20.end" dur="0.2s" values="13;1"/><animate id="svgSpinnersBlocksShuffle25" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle21.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle26" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle22.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle27" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle23.end" dur="0.2s" values="13;1"/></rect></svg>
               <div className="text-sm text-gray-500">
-                    Mohon tunggu sebentar...
+                Mohon tunggu sebentar...
               </div>
             </div>
           ) : error ? (
@@ -74,36 +87,73 @@ const Journal = () => {
               Tidak ada jurnal untuk hari ini
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="min-w-full bg-white">
-                <thead>
-                  <tr>
-                    <th className="py-2 px-4 text-left">Nama Siswa</th>
-                    <th className="py-2 px-4 text-left">Nama Guru</th>
-                    <th className="py-2 px-4 text-left">Kegiatan</th>
-                    <th className="py-2 px-4 text-left">Deskripsi</th>
-                    <th className="py-2 px-4 text-left">Tanggal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {journals.map((journal) => (
-                    <tr key={journal.id} className="border-t">
-                      <td className="py-2 px-4">{journal.name_student}</td>
-                      <td className="py-2 px-4">{journal.name_teachers}</td>
-                      <td className="py-2 px-4">{journal.name}</td>
-                      <td className="py-2 px-4">
-                        {journal.description.length > 100
-                          ? `${journal.description.substring(0, 100)}...`
-                          : journal.description}
-                      </td>
-                      <td className="py-2 px-4 text-blue-500">
-                        {new Date(journal.date).toLocaleDateString('id-ID')}
-                      </td>
+            <>
+              <div className="overflow-x-auto">
+                <table className="min-w-full bg-white">
+                  <thead>
+                    <tr>
+                      <th className="py-2 px-4 text-left">Nama Siswa</th>
+                      <th className="py-2 px-4 text-left">Nama Guru</th>
+                      <th className="py-2 px-4 text-left">Kegiatan</th>
+                      <th className="py-2 px-4 text-left">Deskripsi</th>
+                      <th className="py-2 px-4 text-left">Tanggal</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    {currentItems.map((journal) => (
+                      <tr key={journal.id} className="border-t">
+                        <td className="py-2 px-4">{journal.name_student}</td>
+                        <td className="py-2 px-4">{journal.name_teachers}</td>
+                        <td className="py-2 px-4">{journal.name}</td>
+                        <td className="py-2 px-4">
+                          {journal.description.length > 100
+                            ? `${journal.description.substring(0, 100)}...`
+                            : journal.description}
+                        </td>
+                        <td className="py-2 px-4 text-blue-500">
+                          {new Date(journal.date).toLocaleDateString('id-ID')}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Pagination */}
+              <div className="flex justify-between items-center mt-6 px-4">
+                <button
+                  onClick={() => paginate(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className={`px-4 py-2 rounded ${
+                    currentPage === 1
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      : 'bg-blue-500 text-white hover:bg-blue-600'
+                  }`}
+                >
+                  Previous
+                </button>
+
+                <div className="text-center text-gray-600">
+                  Page {currentPage} of {totalPages}
+                </div>
+
+                <button
+                  onClick={() => paginate(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className={`px-4 py-2 rounded ${
+                    currentPage === totalPages
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      : 'bg-blue-500 text-white hover:bg-blue-600'
+                  }`}
+                >
+                  Next
+                </button>
+              </div>
+
+              {/* <div className="text-center mt-4 text-sm text-gray-500">
+                Menampilkan {indexOfFirstItem + 1} - {Math.min(indexOfLastItem, journals.length)} dari {journals.length} data
+              </div> */}
+            </>
           )}
         </div>
       </div>
