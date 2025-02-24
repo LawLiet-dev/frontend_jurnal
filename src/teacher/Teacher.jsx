@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import HeaderTeacher from '../components/HeaderGuru';
+import JournalModal from '../components/JournalModal';
+import UnsubmittedJournalModal from '../components/UnsubmittedJournalModal';
 import Api from "../services/api";
 import Cookies from "js-cookie";
 
 function Teacher() {
   const [dudiData, setDudiData] = useState([]);
   const [journalData, setJournalData] = useState([]);
+  const [isUnsubmittedModalOpen, setIsUnsubmittedModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
   // Fetch both student and journal data
@@ -159,7 +163,10 @@ function Teacher() {
                       <div className="bg-blue-100 text-blue-500 text-center py-2 px-4 rounded-lg w-16">
                         {journalData.length}X
                       </div>
-                      <button className="text-white py-2 px-4 rounded-lg flex items-center" style={{ backgroundColor:"#2563EB" }}>
+                      <button 
+                        onClick={() => setIsModalOpen(true)} 
+                        className="text-white py-2 px-4 rounded-lg flex items-center" 
+                        style={{ backgroundColor:"#2563EB" }}>
                         Detail <i className="fas fa-chevron-right ml-2"></i>
                       </button>
                     </div>
@@ -172,10 +179,28 @@ function Teacher() {
                       <div className="bg-blue-100 text-blue-500 text-center py-2 px-4 rounded-lg w-16 mr-[20px]">
                         {stats.studentsWithoutTodayJournal}X
                       </div>
-                      <button className="bg-blue-500 text-white py-2 px-4 rounded-lg flex items-center" style={{ backgroundColor:"#2563EB" }}>
+                      <button 
+                        onClick={() => setIsUnsubmittedModalOpen(true)}
+                        className="bg-blue-500 text-white py-2 px-4 rounded-lg flex items-center" 
+                        style={{ backgroundColor:"#2563EB" }}>
                         Detail <i className="fas fa-chevron-right ml-2"></i>
                       </button>
                     </div>
+
+                    {/* Journal Modal */}
+                    <JournalModal 
+                      isOpen={isModalOpen}
+                      onClose={() => setIsModalOpen(false)}
+                      journalData={journalData}
+                      studentData={dudiData}  // Add this prop
+                    />
+
+                    <UnsubmittedJournalModal 
+                      isOpen={isUnsubmittedModalOpen}
+                      onClose={() => setIsUnsubmittedModalOpen(false)}
+                      studentData={dudiData}
+                      journalData={journalData}
+                    />
 
                     {/* Student List */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -258,10 +283,27 @@ function Teacher() {
                     <div className="bg-blue-100 text-blue-500 text-center py-2 px-4 rounded-lg w-16 ml-5">
                       {journalData.length}X
                     </div>
-                    <button className="bg-blue-500 text-white py-2 px-4 rounded-lg flex items-center">
+                    <button 
+                      onClick={() => setIsModalOpen(true)} 
+                      className="bg-blue-500 text-white py-2 px-4 rounded-lg flex items-center">
                       Detail <i className="fas fa-chevron-right ml-2"></i>
                     </button>
                   </div>
+
+                  {/* Journal Modal */}
+                  <JournalModal 
+                      isOpen={isModalOpen}
+                      onClose={() => setIsModalOpen(false)}
+                      journalData={journalData}
+                      studentData={dudiData}  // Add this prop
+                    />
+
+                    <UnsubmittedJournalModal 
+                      isOpen={isUnsubmittedModalOpen}
+                      onClose={() => setIsUnsubmittedModalOpen(false)}
+                      studentData={dudiData}
+                      journalData={journalData}
+                    />
 
                   <div className="flex justify-between items-center mb-6">
                     <div className="text-left">
@@ -271,7 +313,9 @@ function Teacher() {
                     <div className="bg-blue-100 text-blue-500 text-center py-2 px-4 rounded-lg w-16">
                       {stats.studentsWithoutTodayJournal}X
                     </div>
-                    <button className="bg-blue-500 text-white py-2 px-4 rounded-lg flex items-center">
+                    <button 
+                      onClick={() => setIsUnsubmittedModalOpen(true)}
+                      className="bg-blue-500 text-white py-2 px-4 rounded-lg flex items-center">
                       Detail <i className="fas fa-chevron-right ml-2"></i>
                     </button>
                   </div>

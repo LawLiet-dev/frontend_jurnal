@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import Api from '../services/api';
 import HeaderTeacher from '../components/HeaderGuru';
+import StudentJournalModal from "../components/StudentJournalModal";
 
 const Siswa = () => {
   const [students, setStudents] = useState([]);
+  const [selectedStudentId, setSelectedStudentId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -78,26 +81,29 @@ const Siswa = () => {
                   <table className="w-full text-left">
                     <thead>
                       <tr className="">
-                        <th className="px-4 py-3 text-sm font-medium text-gray-700">Nama</th>
-                        <th className="px-4 py-3 text-sm font-medium text-gray-700">NISN</th>
-                        <th className="px-4 py-3 text-sm font-medium text-gray-700">Email</th>
-                        <th className="px-4 py-3 text-sm font-medium text-gray-700">Guru</th>
-                        <th className="px-4 py-3 text-sm font-medium text-gray-700">DUDI</th>
-                        <th className="px-4 py-3 text-sm font-medium text-gray-700">Aksi</th>
+                        <th className="px-12 py-3 text-sm font-medium text-gray-700">Nama</th>
+                        <th className="px-12 py-3 text-sm font-medium text-gray-700">NISN</th>
+                        <th className="px-12 py-3 text-sm font-medium text-gray-700">Email</th>
+                        {/* <th className="px-4 py-3 text-sm font-medium text-gray-700">Guru</th> */}
+                        {/* <th className="px-12 py-3 text-sm font-medium text-gray-700">DUDI</th> */}
+                        <th className="px-12 py-3 text-sm font-medium text-gray-700">Aksi</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
                       {students.map((student) => (
                         <tr key={student.id} className="hover:bg-gray-50">
-                          <td className="px-4 py-4 text-sm text-gray-900">{student.name}</td>
-                          <td className="px-4 py-4 text-sm text-gray-600">{student.nisn}</td>
-                          <td className="px-4 py-4 text-sm text-blue-500">{student.email}</td>
-                          <td className="px-4 py-4 text-sm text-gray-600">{student.name_teacher}</td>
-                          <td className="px-4 py-4 text-sm text-gray-600">{student.dudi_name}</td>
-                          <td className="px-4 py-4 text-sm">
+                          <td className="px-12 py-4 text-sm text-gray-600">{student.name}</td>
+                          <td className="px-12 py-4 text-sm text-blue-500">{student.nisn}</td>
+                          <td className="px-12 py-4 text-sm text-gray-900">{student.email}</td>
+                          {/* <td className="px-4 py-4 text-sm text-gray-600">{student.name_teacher}</td> */}
+                          {/* <td className="px-12 py-4 text-sm text-gray-600">{student.dudi_name}</td> */}
+                          <td className="px-12 py-4 text-sm">
                             <button 
                               className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded text-sm transition-colors"
-                              onClick={() => {/* Handle detail view */}}
+                              onClick={() => {
+                                setSelectedStudentId(student.id);
+                                setIsModalOpen(true);
+                              }}
                             >
                               Detail
                             </button>
@@ -109,6 +115,11 @@ const Siswa = () => {
                 </div>
               )}
             </div>
+            <StudentJournalModal
+                studentId={selectedStudentId}
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+              />
           </div>
         </div>
       </main>
