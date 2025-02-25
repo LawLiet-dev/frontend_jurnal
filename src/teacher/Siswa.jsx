@@ -11,6 +11,7 @@ const Siswa = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const itemsPerPage = 6;
 
   const fetchStudents = async () => {
@@ -37,6 +38,21 @@ const Siswa = () => {
 
   useEffect(() => {
     fetchStudents();
+  }, []);
+
+  useEffect(() => {
+    // Fungsi untuk memperbarui state lebar window
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    // Tambahkan event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   // Get current items
@@ -140,6 +156,7 @@ const Siswa = () => {
                     <button
                       onClick={() => paginate(currentPage + 1)}
                       disabled={currentPage === totalPages}
+                      style={windowWidth === 1366 ? { marginRight: "150px" } : {}}
                       className={`px-4 py-2 rounded ${
                         currentPage === totalPages
                           ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
@@ -151,7 +168,9 @@ const Siswa = () => {
                   </div>
 
                   <div className='hidden md:block'>
-                    <div className="text-center mt-4 text-sm text-gray-500">
+                    <div className="text-center mt-4 text-sm text-gray-500" 
+                        style={windowWidth === 1366 ? { marginRight: "130px" } : {}}
+                    >
                       Menampilkan {indexOfFirstItem + 1} - {Math.min(indexOfLastItem, students.length)} dari {students.length} data
                     </div>
                   </div>

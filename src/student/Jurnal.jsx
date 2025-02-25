@@ -240,7 +240,14 @@ const Jurnal = () => {
             {/* Form Section */}
             <div className="lg:!w-[500px] bg-white p-6 rounded-lg shadow-md mb-6 lg:mb-0 w-[310px]">
             {/* style={{ width:"500px" }} */}
-              <h1 className="text-gray-600 font-bold" style={{ marginBottom: "10px", fontSize: "24px", fontWeight: "700" }}>
+              {/* <h1 className="text-gray-600 font-bold" style={{ marginBottom: "10px", fontSize: "24px", fontWeight: "700" }}>
+                Pengisian Jurnal {nameStatus.studentsName}
+              </h1> */}
+              <h1 
+                className="text-gray-600 font-bold max-w-full overflow-hidden text-ellipsis whitespace-nowrap hover:cursor-help" 
+                style={{ marginBottom: "10px", fontSize: "24px", fontWeight: "700" }}
+                title={`Pengisian Jurnal ${nameStatus.studentsName}`}
+              >
                 Pengisian Jurnal {nameStatus.studentsName}
               </h1>
               <Toaster position="top-right" />
