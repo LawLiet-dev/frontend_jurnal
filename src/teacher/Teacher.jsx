@@ -111,7 +111,7 @@ function Teacher() {
             
             {/* Collaborator Section */}
             <div className="collaborator bg-white p-4" style={{ width:"350px" }}>
-              <h2 className="text-lg font-semibold mb-4 rounded-full h-8 text-center pt-1" style={{ width:"150px", backgroundColor:"#F0F2F5", color:"#121417" }}>Dudi</h2>
+              <h2 className="text-lg font-semibold mb-6 rounded-full h-8 text-center pt-1" style={{ width:"100px", backgroundColor:"#F0F2F5", color:"#121417" }}>Dudi</h2>
               {loading ? (
                 <LoadingSpinner />
               ) : uniqueDudiNames.length > 0 ? (
@@ -235,7 +235,7 @@ function Teacher() {
           
           {/* Collaborator Section */}
           <div className="collaborator bg-white p-4 w-full md:w-[350px] mb-10">
-            <h2 className="text-lg font-semibold mb-4 rounded-full h-8 text-center pt-1 w-[150px] bg-gray-200 text-gray-900">
+            <h2 className="text-lg font-semibold mb-6 rounded-full h-8 text-center pt-1 w-[100px] bg-gray-200 text-gray-900">
               Dudi
             </h2>
             {loading ? (
