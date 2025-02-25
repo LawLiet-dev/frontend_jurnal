@@ -89,7 +89,7 @@ function HeaderTeacher() {
       {/* Header untuk Desktop */}
       <div className="hidden md:block">
         <header className="bg-white shadow-lg border-b border-gray-200 relative z-10">
-          <div className="container mx-auto flex justify-between items-center py-2 px-6">
+          <div className="mx-auto flex justify-between items-center py-2 px-10">
             <div className="flex items-center">
               <img
                 src="/assets/images/smk.png"
@@ -160,7 +160,7 @@ function HeaderTeacher() {
           </div>
         </header>
         <nav className="bg-white shadow-sm mt-2">
-          <div className="container mx-auto flex space-x-4 py-2 px-6">
+          <div className="mx-auto flex space-x-4 py-2 px-10">
             <Link
               to="/teacher/*"
               // className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
@@ -287,7 +287,7 @@ function HeaderTeacher() {
             </nav>
 
             {/* Bottom Actions */}
-            <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
+            <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 mb-25">
               <button
                 onClick={logoutHandler}
                 className="w-full bg-red-500 text-white py-2 px-4 rounded-lg"

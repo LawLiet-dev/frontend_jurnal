@@ -401,7 +401,7 @@ function Home() {
               className="w-28"
             />
             <img
-              src="assets/images/brands/kominfo.svg"
+              src="assets/images/brands/Logo_BRI.png"
               className="w-28"
             />
             <img

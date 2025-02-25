@@ -28,6 +28,8 @@ const Student = () => {
     dudiName: ''
   });
 
+  // const [is1920px, setIs1920px] = useState(window.innerWidth === 1920);
+
   const fetchJournalData = async (pageNumber = 1) => {
     setLoading(true);
     try {
@@ -131,6 +133,16 @@ const Student = () => {
         );
     }
   };
+
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setIs1920px(window.innerWidth === 1920);
+  //   };
+
+  //   window.addEventListener("resize", handleResize);
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []);
+  const is1920px = typeof window !== "undefined" && window.innerWidth === 1920;
 
   return (
     <div>
@@ -247,7 +259,10 @@ const Student = () => {
               )}
             </div>
 
-            <div className="bg-blue-500 rounded-lg shadow-lg p-6 lg:w-1/3">
+            <div
+              className="bg-blue-500 rounded-lg shadow-lg p-6 lg:w-1/3 w-[320px]"
+              style={{ marginRight: is1920px ? "50px" : "50px" }}
+            >
               <h2 className="text-white text-xl font-semibold mb-2">
                 Statistik Jurnal
               </h2>

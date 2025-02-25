@@ -264,9 +264,18 @@ function Teacher() {
           </div>
 
           {/* Statistics Section */}
-          <div 
+          {/* <div 
             className="bg-white rounded-lg w-full md:w-4/5 max-w-4xl border-4 border-blue-500"
-          >
+          > */}
+          <div 
+            style={{
+              borderRight: "7px solid #3B82F6", 
+              borderBottom: "7px solid #3B82F6",
+              borderLeft: "7px solid #3B82F6",
+              borderRadius: "10px"
+            }} 
+            className="bg-white rounded-lg w-4/5 max-w-4xl w-full "
+            >
             <div className="bg-blue-500 text-white p-4 rounded-t-lg text-lg">
               Statistik Jurnal
             </div>

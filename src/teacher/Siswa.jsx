@@ -56,7 +56,7 @@ const Siswa = () => {
       
       {/* Main Content */}
       <main className="p-4">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-8xl">
           {/* Page Header */}
           <div className="md:hidden">
             <div className="mb-1">
@@ -70,7 +70,7 @@ const Siswa = () => {
           {/* Card Container */}
           <div>
             {/* Card Content */}
-            <div className="px-6 py-4 lg:container">
+            <div className="px-10 py-4 lg:w-[1500px]">
               {isLoading ? (
                 <div className="flex flex-col justify-center items-center h-40 space-y-4">
                   <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><rect width="10" height="10" x="1" y="1" fill="currentColor" rx="1"><animate id="svgSpinnersBlocksShuffle20" fill="freeze" attributeName="x" begin="0;svgSpinnersBlocksShuffle27.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle21" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle24.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle22" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle25.end" dur="0.2s" values="13;1"/><animate id="svgSpinnersBlocksShuffle23" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle26.end" dur="0.2s" values="13;1"/></rect><rect width="10" height="10" x="1" y="13" fill="currentColor" rx="1"><animate id="svgSpinnersBlocksShuffle24" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle20.end" dur="0.2s" values="13;1"/><animate id="svgSpinnersBlocksShuffle25" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle21.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle26" fill="freeze" attributeName="y" begin="svgSpinnersBlocksShuffle22.end" dur="0.2s" values="1;13"/><animate id="svgSpinnersBlocksShuffle27" fill="freeze" attributeName="x" begin="svgSpinnersBlocksShuffle23.end" dur="0.2s" values="13;1"/></rect></svg>
@@ -130,9 +130,11 @@ const Siswa = () => {
                     >
                       Previous
                     </button>
-
-                    <div className="text-center text-gray-600">
-                      Page {currentPage} of {totalPages}
+                    
+                    <div className="hidden md:block">
+                      <div className="text-center text-gray-600">
+                        Page {currentPage} of {totalPages}
+                      </div>
                     </div>
 
                     <button
@@ -148,9 +150,11 @@ const Siswa = () => {
                     </button>
                   </div>
 
-                  {/* <div className="text-center mt-4 text-sm text-gray-500">
-                    Menampilkan {indexOfFirstItem + 1} - {Math.min(indexOfLastItem, students.length)} dari {students.length} data
-                  </div> */}
+                  <div className='hidden md:block'>
+                    <div className="text-center mt-4 text-sm text-gray-500">
+                      Menampilkan {indexOfFirstItem + 1} - {Math.min(indexOfLastItem, students.length)} dari {students.length} data
+                    </div>
+                  </div>
                 </>
               )}
             </div>

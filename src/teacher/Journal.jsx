@@ -132,9 +132,11 @@ const Journal = () => {
                 >
                   Previous
                 </button>
-
-                <div className="text-center text-gray-600">
-                  Page {currentPage} of {totalPages}
+                
+                <div className='hidden md:block'>
+                  <div className="text-center text-gray-600">
+                    Page {currentPage} of {totalPages}
+                  </div>
                 </div>
 
                 <button

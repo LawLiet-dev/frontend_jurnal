@@ -235,10 +235,10 @@ const Jurnal = () => {
     <div>
       <HeaderSiswa />
       <div className="bg-white p-4">
-        <div className="mx-auto container">
+        <div className="px-1">
           <div className="flex flex-col lg:flex-row">
             {/* Form Section */}
-            <div className="w-full lg:!w-[500px] bg-white p-6 rounded-lg shadow-md mb-6 lg:mb-0">
+            <div className="lg:!w-[500px] bg-white p-6 rounded-lg shadow-md mb-6 lg:mb-0 w-[310px]">
             {/* style={{ width:"500px" }} */}
               <h1 className="text-gray-600 font-bold" style={{ marginBottom: "10px", fontSize: "24px", fontWeight: "700" }}>
                 Pengisian Jurnal {nameStatus.studentsName}

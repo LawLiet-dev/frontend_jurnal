@@ -4,6 +4,7 @@ import Select from "react-select";
 import { Link, useNavigate, useLocation  } from "react-router-dom";
 import Cookies from "js-cookie";
 import Api from "../services/api"
+import { saveAs } from 'file-saver';
 import { useAuthStore } from "../store/auth";
 
 function HeaderSiswa() {
@@ -249,7 +250,7 @@ function HeaderSiswa() {
       {/* Header untuk Desktop */}
       <div className="hidden md:block">
         <header className="bg-white shadow-lg border-b border-gray-200 relative z-10">
-          <div className="container mx-auto flex justify-between items-center py-2 px-6">
+          <div className="mx-auto flex justify-between items-center py-2 md:px-10">
             <div className="flex items-center">
               <img
                 src="/assets/images/smk.png"
@@ -328,7 +329,7 @@ function HeaderSiswa() {
         
         {/* Navigation */}
         <nav className="bg-white mt-1">
-          <div className="container mx-auto flex space-x-4 py-2 px-6">
+          <div className="mx-auto flex space-x-4 py-2 md:px-10">
             <Link
               to="/student/*"
               // className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
@@ -361,79 +362,7 @@ function HeaderSiswa() {
           </div>
         </nav>
       </div>
-
-      {/* Settings Modal */}
-      {/* {isSettingsModalOpen && ( 
-      <div className="fixed inset-0 flex items-center justify-center bg-gray-50 bg-opacity-50 z-50">
-        <div className="bg-white p-8 rounded-lg shadow-lg w-1/4 relative" ref={modalRef}>
-          <button 
-            onClick={handleCloseSettingsModal}
-            className="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-          
-          <div className="mb-4 text-center">
-            <img
-              src="/assets/images/smk.png"
-              alt="Settings Icon"
-              className="w-30 h-30 mx-auto mb-4"
-            />
-          </div>
-
-          {errors.api && (
-            <div className="mb-4 p-2 bg-red-100 text-red-600 rounded">
-              {errors.api}
-            </div>
-          )}
-
-          <div className="mb-4">
-            <label htmlFor="dudi-select" className="block text-sm font-medium text-gray-600 mb-2">
-              Silahkan pilih Dudi anda
-            </label>
-            <Select
-              id="dudi-select"
-              options={dudiOptions}
-              value={selectedDudi}
-              onChange={setSelectedDudi}
-              placeholder="Pilih Dudi"
-              isSearchable
-              className={errors.dudi ? "border-red-500" : ""}
-            />
-            {errors.dudi && <span className="text-red-500 text-sm">{errors.dudi}</span>}
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="pembimbing-select" className="block text-sm font-medium text-gray-600 mb-2">
-              Silahkan pilih Pembimbing anda
-            </label>
-            <Select
-              id="pembimbing-select"
-              options={teacherOptions}
-              value={selectedTeacher}
-              onChange={setSelectedTeacher}
-              placeholder="Pilih Pembimbing"
-              isSearchable
-              className={errors.teacher ? "border-red-500" : ""}
-            />
-            {errors.teacher && <span className="text-red-500 text-sm">{errors.teacher}</span>}
-          </div>
-
-          <div className="flex space-x-4 mt-5">
-            <button
-              onClick={handleSaveSettings}
-              className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg mb-5 hover:bg-blue-600 transition-colors"
-              disabled={!selectedDudi || !selectedTeacher}
-            >
-              Simpan Pilihan
-            </button>
-          </div>
-        </div>
-      </div>
-    )} */}
+      
       {isSettingsModalOpen && ( 
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900/30 backdrop-blur-md z-50">
           <div 
@@ -577,7 +506,7 @@ function HeaderSiswa() {
                 <button 
                 onClick={() => setIsSidebarOpen(false)}
                 className="text-gray-500 hover:text-gray-700"
-                style={{ marginLeft:"90px" }}
+                style={{ marginLeft:"60px" }}
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -612,7 +541,7 @@ function HeaderSiswa() {
             </nav>
 
             {/* Bottom Actions */}
-            <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
+            <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 mb-25">
               <button
                 onClick={handleSettingsClick}
                 className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg mb-2"
