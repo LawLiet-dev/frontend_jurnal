@@ -236,7 +236,7 @@ function Teacher() {
           {/* Collaborator Section */}
           <div className="collaborator bg-white p-4 w-full md:w-[350px] mb-10">
             <h2 className="text-lg font-semibold mb-4 rounded-full h-8 text-center pt-1 w-[150px] bg-gray-200 text-gray-900">
-              Collaborator
+              Dudi
             </h2>
             {loading ? (
               <LoadingSpinner />
