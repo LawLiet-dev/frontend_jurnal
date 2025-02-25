@@ -260,7 +260,7 @@ const Student = () => {
             </div>
 
             <div
-              className="bg-blue-500 rounded-lg shadow-lg p-6 lg:w-1/3 w-[320px]"
+              className="bg-blue-500 rounded-lg shadow-lg p-6 lg:w-1/3 w-full"
               style={{ marginRight: is1920px ? "50px" : "50px" }}
             >
               <h2 className="text-white text-xl font-semibold mb-2">
