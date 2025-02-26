@@ -234,11 +234,11 @@ const Jurnal = () => {
   return (
     <div>
       <HeaderSiswa />
-      <div className="bg-white px-25 mt-10">
+      <div className="bg-white p-4 lg:!px-24 lg:!py-4">
         <div className="px-1">
           <div className="flex flex-col lg:flex-row">
             {/* Form Section */}
-            <div className="lg:!w-[500px] bg-white p-6 rounded-lg shadow-md mb-6 lg:mb-0 w-[310px]">
+            <div className="lg:!w-[500px] bg-white p-6 rounded-lg shadow-md mb-6 lg:mb-0 w-full">
             {/* style={{ width:"500px" }} */}
               {/* <h1 className="text-gray-600 font-bold" style={{ marginBottom: "10px", fontSize: "24px", fontWeight: "700" }}>
                 Pengisian Jurnal {nameStatus.studentsName}
@@ -389,7 +389,7 @@ const Jurnal = () => {
                               year: 'numeric'
                             })}
                           </td>
-                          <td className="py-2 flex flex-col md:flex-row md:space-y-0">
+                          <td className="py-2 px-4 flex flex-col md:flex-row md:space-y-0">
                             <button 
                               onClick={() => handleEdit(journal)}
                               className="px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 mx-auto md:px-4"

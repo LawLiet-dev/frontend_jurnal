@@ -133,7 +133,7 @@ function Teacher() {
                   </div>
                 ))
               ) : (
-                <p className="text-center text-gray-500">No collaborators found</p>
+                <p className="text-center text-gray-500">Tidak ada dudi</p>
               )}
             </div>
 
@@ -259,7 +259,7 @@ function Teacher() {
                 </div>
               ))
             ) : (
-              <p className="text-center text-gray-500">No collaborators found</p>
+              <p className="text-center text-gray-500">Tidak ada dudi</p>
             )}
           </div>
 
