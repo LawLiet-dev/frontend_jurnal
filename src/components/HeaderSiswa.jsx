@@ -291,21 +291,35 @@ function HeaderSiswa() {
                         <h5 className="text-xl font-semibold text-gray-800">User Profile</h5>
                       </div>
                       <div className="flex items-center pb-4 border-b border-gray-200">
-                        <img 
-                          src="/assets/images/profile/user-7.jpg" 
-                          className="rounded-full w-16 h-16 border-2 border-gray-200 object-cover"
-                          alt="Profile"
-                        />
-                        <div className="ml-4">
-                          <h5 className="text-lg font-semibold text-gray-800">{user?.name || 'User'}</h5>
-                          <span className="block text-gray-600 text-sm mb-1">{studentData.student?.nisn || '-'}</span>
-                          <div className="flex items-center text-gray-600 text-sm">
-                            <Mail className="w-4 h-4 mr-2" />
-                            {user?.email || 'email@example.com'}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="pt-4 space-y-2">
+  		       <img 
+    			src="/assets/images/profile/user-7.jpg" 
+    			className="rounded-full w-16 h-16 border-2 border-gray-200 object-cover"
+    			alt="Profile"
+  		      />
+  		      <div className="ml-4 overflow-hidden">
+    			<div className="group relative">
+      			  <h5 className="text-lg font-semibold text-gray-800 truncate max-w-[200px]">
+        			{user?.name || 'User'}
+      			  </h5>
+      		        <div className="hidden group-hover:block absolute z-10 bg-white shadow-lg rounded-md p-2 text-sm text-gray-800 whitespace-normal max-w-xs">
+        			{user?.name || 'User'}
+      			</div>
+    		      </div>
+    			<span className="block text-gray-600 text-sm mb-1 truncate max-w-[200px]">
+      				{studentData.student?.nisn || '-'}
+    			</span>
+    		     <div className="group relative">
+      			<div className="flex items-center text-gray-600 text-sm truncate max-w-[200px]">
+        		  <Mail className="flex-shrink-0 w-4 h-4 mr-2" />
+        			{user?.email || 'email@example.com'}
+      			</div>
+      			  <div className="hidden group-hover:block absolute z-10 bg-white shadow-lg rounded-md p-2 text-sm text-gray-800 whitespace-normal max-w-xs">
+        			{user?.email || 'email@example.com'}
+      			  </div>
+    			</div>
+  		      </div>
+		   </div>                      
+		      <div className="pt-4 space-y-2">
                         <button 
                           className="w-full bg-primary hover:bg-primary text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium"
                           onClick={handleSettingsClick}
@@ -331,7 +345,7 @@ function HeaderSiswa() {
         <nav className="bg-white shadow-sm shadow-lg border-b border-gray-200">
           <div className="mx-auto flex space-x-4 py-2 px-25 mt-2 mb-2">
             <Link
-              to="/student/*"
+              to="/student"
               // className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
               className={`px-4 py-2 ${
                 location.pathname.includes("/student")
@@ -342,7 +356,7 @@ function HeaderSiswa() {
               Dashboard
             </Link>
             <Link
-              to="/jurnal/*"
+              to="/jurnal"
               // className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
               className={`px-4 py-2 ${
                 location.pathname.includes("/jurnal")
@@ -518,14 +532,14 @@ function HeaderSiswa() {
             {/* Navigation Links */}
             <nav className="space-y-2">
               <Link
-                to="/student/*"
+                to="/student"
                 className="block px-4 py-2 text-gray-600 hover:bg-blue-500 hover:text-white rounded-lg transition-colors"
                 onClick={() => setIsSidebarOpen(false)}
               >
                 Dashboard
               </Link>
               <Link
-                to="/jurnal/*"
+                to="/jurnal"
                 className="block px-4 py-2 text-gray-600 hover:bg-blue-500 hover:text-white rounded-lg transition-colors"
                 onClick={() => setIsSidebarOpen(false)}
               >

@@ -131,21 +131,41 @@ function HeaderTeacher() {
                       <h5 className="text-xl font-semibold text-gray-800">User Profile</h5>
                     </div>
                     <div className="flex items-center pb-4 border-b border-gray-200">
-                      <img 
-                        src="/assets/images/profile/user-7.jpg" 
-                        className="rounded-full w-16 h-16 border-2 border-gray-200 object-cover"
-                        alt="Profile"
-                      />
-                      <div className="ml-5">
-                        <h5 className="text-lg font-semibold text-gray-800">{user?.name || 'User'}</h5>
-                        <span className="block text-gray-600 text-sm mb-1">{user?.role || 'Teacher'}</span>
-                        <div className="flex items-center text-gray-600 text-sm">
-                          <Mail className="w-4 h-4 mr-2" />
-                            {user?.email || 'email@example.com'}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="pt-4 space-y-2">
+  <img 
+    src="/assets/images/profile/user-7.jpg" 
+    className="rounded-full w-16 h-16 border-2 border-gray-200 object-cover"
+    alt="Profile"
+  />
+  <div className="ml-5 overflow-hidden">
+    <div className="group relative">
+      <h5 className="text-lg font-semibold text-gray-800 truncate max-w-[200px]">
+        {user?.name || 'User'}
+      </h5>
+      <div className="hidden group-hover:block absolute z-10 bg-white shadow-lg rounded-md p-2 text-sm text-gray-800 whitespace-normal max-w-xs">
+        {user?.name || 'User'}
+      </div>
+    </div>
+    
+    <div className="group relative">
+      <span className="block text-gray-600 text-sm mb-1 truncate max-w-[200px]">
+        {user?.role || 'Teacher'}
+      </span>
+      <div className="hidden group-hover:block absolute z-10 bg-white shadow-lg rounded-md p-2 text-sm text-gray-800 whitespace-normal max-w-xs">
+        {user?.role || 'Teacher'}
+      </div>
+    </div>
+    
+    <div className="group relative">
+      <div className="flex items-center text-gray-600 text-sm truncate max-w-[200px]">
+        <Mail className="flex-shrink-0 w-4 h-4 mr-2" />
+        {user?.email || 'email@example.com'}
+      </div>
+      <div className="hidden group-hover:block absolute z-10 bg-white shadow-lg rounded-md p-2 text-sm text-gray-800 whitespace-normal max-w-xs">
+        {user?.email || 'email@example.com'}
+      </div>
+    </div>
+  </div>
+</div>                    <div className="pt-4 space-y-2">
                       <button 
                         className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium"
                         onClick={logoutHandler}
@@ -162,7 +182,7 @@ function HeaderTeacher() {
         <nav className="bg-white shadow-sm shadow-lg border-b border-gray-200">
           <div className="mx-auto flex space-x-4 py-2 px-25 mt-2 mb-2">
             <Link
-              to="/teacher/*"
+              to="/teacher"
               // className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
               className={`px-4 py-2 ${
                 location.pathname.includes("/teacher")
@@ -173,7 +193,7 @@ function HeaderTeacher() {
               Dashboard
             </Link>
             <Link
-              to="/siswa/*"
+              to="/siswa"
               // className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
               className={`px-4 py-2 ${
                 location.pathname.includes("/siswa")
@@ -184,7 +204,7 @@ function HeaderTeacher() {
               Siswa
             </Link>
             <Link
-              to="/journal/*"
+              to="/journal"
               // className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"
               className={`px-4 py-2 ${
                 location.pathname.includes("/journal")
@@ -264,21 +284,21 @@ function HeaderTeacher() {
             {/* Navigation Links */}
             <nav className="space-y-2">
               <Link
-                to="/teacher/*"
+                to="/teacher"
                 className="block px-4 py-2 text-gray-600 hover:bg-blue-500 hover:text-white rounded-lg transition-colors"
                 onClick={() => setIsSidebarOpen(false)}
               >
                 Dashboard
               </Link>
               <Link
-                to="/siswa/*"
+                to="/siswa"
                 className="block px-4 py-2 text-gray-600 hover:bg-blue-500 hover:text-white rounded-lg transition-colors"
                 onClick={() => setIsSidebarOpen(false)}
               >
                 Siswa
               </Link>
               <Link
-                to="/journal/*"
+                to="/journal"
                 className="block px-4 py-2 text-gray-600 hover:bg-blue-500 hover:text-white rounded-lg transition-colors"
                 onClick={() => setIsSidebarOpen(false)}
               >

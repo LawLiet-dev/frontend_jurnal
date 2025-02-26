@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Login from './auth/login'
 import Register from './auth/Register'
 import Reset from './auth/Reset'
@@ -32,6 +32,7 @@ function App() {
 function AppRoutes() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isValidating, setIsValidating] = useState(true);
   
   useEffect(() => {
     // Define patterns to check
@@ -43,14 +44,34 @@ function AppRoutes() {
       { match: /^\/jurnal\/.*$/, redirect: '/jurnal' }
     ];
     
+    let shouldRedirect = false;
+    let redirectTo = '';
+    
     // Check if current path matches any pattern
     for (const pattern of patterns) {
       if (pattern.match.test(location.pathname) && location.pathname !== pattern.redirect) {
-        navigate(pattern.redirect, { replace: true });
+        shouldRedirect = true;
+        redirectTo = pattern.redirect;
         break;
       }
     }
-  }, [location, navigate]);
+    
+    if (shouldRedirect) {
+      // Redirect dan reload halaman secara langsung
+      window.location.href = redirectTo;
+      return; // Hentikan eksekusi lebih lanjut
+    }
+    
+    // Set validating to false once we've checked
+    setIsValidating(false);
+  }, [location.pathname]);
+  
+  // Don't render routes until URL validation is complete
+  if (isValidating) {
+    return <div className="flex items-center justify-center min-h-screen">
+      {/* You could add a loading spinner here if needed */}
+    </div>;
+  }
   
   return (
     <Routes>
