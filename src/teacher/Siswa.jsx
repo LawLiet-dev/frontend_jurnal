@@ -75,12 +75,12 @@ const Siswa = () => {
         <div className="max-w-8xl">
           {/* Page Header */}
           <div className="md:hidden">
-            <div className="mb-1">
+            {/* <div className="mb-1">
               <h1 className="text-2xl font-bold text-gray-900" style={{ marginLeft:"10px" }}>Daftar Siswa</h1>
               <p className="mt-1 text-sm text-gray-600" style={{ marginLeft:"10px" }}>
                 Pantau data siswa Anda
               </p>
-            </div>
+            </div> */}
           </div>
 
           {/* Card Container */}
@@ -134,7 +134,7 @@ const Siswa = () => {
                   </div>
 
                   {/* Pagination */}
-                  <div className="flex justify-between items-center mt-6 px-4">
+                  {/* <div className="flex justify-between items-center mt-6 px-4">
                     <button
                       onClick={() => paginate(currentPage - 1)}
                       disabled={currentPage === 1}
@@ -173,7 +173,7 @@ const Siswa = () => {
                     >
                       Menampilkan {indexOfFirstItem + 1} - {Math.min(indexOfLastItem, students.length)} dari {students.length} data
                     </div>
-                  </div>
+                  </div> */}
                 </>
               )}
             </div>

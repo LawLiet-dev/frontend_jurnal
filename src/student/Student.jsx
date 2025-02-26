@@ -150,7 +150,7 @@ const Student = () => {
       <div className="min-h-screen lg:px-25 mt-10">
         <div className="mx-auto">
           <div className="flex flex-col lg:flex-row gap-4">
-            <div className="bg-white p-6 rounded-lg shadow-lg flex-1">
+            <div className="bg-white p-6 rounded-lg shadow-lg flex-1 mx-4 md:mx-0">
               <div className="flex justify-between items-center mb-4">
                 <div>
                   <h1 className="text-xl font-semibold">Journal Saya</h1>
@@ -260,7 +260,7 @@ const Student = () => {
             </div>
 
             <div
-              className="bg-blue-500 rounded-lg shadow-lg p-6 lg:w-1/3 w-full"
+              className="bg-blue-500 rounded-lg shadow-lg p-6 lg:w-1/3 w-full max-w-[90%] mx-auto"
               // style={{ marginRight: is1920px ? "50px" : "50px" }}
             >
               <h2 className="text-white text-xl font-semibold mb-2">
