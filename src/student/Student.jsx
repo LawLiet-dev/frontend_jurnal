@@ -147,8 +147,8 @@ const Student = () => {
   return (
     <div>
       <HeaderSiswa />
-      <div className="min-h-screen">
-        <div className="container mx-auto p-4">
+      <div className="min-h-screen lg:px-25 mt-10">
+        <div className="mx-auto">
           <div className="flex flex-col lg:flex-row gap-4">
             <div className="bg-white p-6 rounded-lg shadow-lg flex-1">
               <div className="flex justify-between items-center mb-4">
@@ -261,7 +261,7 @@ const Student = () => {
 
             <div
               className="bg-blue-500 rounded-lg shadow-lg p-6 lg:w-1/3 w-full"
-              style={{ marginRight: is1920px ? "50px" : "50px" }}
+              // style={{ marginRight: is1920px ? "50px" : "50px" }}
             >
               <h2 className="text-white text-xl font-semibold mb-2">
                 Statistik Jurnal

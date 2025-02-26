@@ -89,7 +89,7 @@ function HeaderTeacher() {
       {/* Header untuk Desktop */}
       <div className="hidden md:block">
         <header className="bg-white shadow-lg border-b border-gray-200 relative z-10">
-          <div className="mx-auto flex justify-between items-center py-2 px-10">
+          <div className="mx-auto flex justify-between items-center py-2 px-20">
             <div className="flex items-center">
               <img
                 src="/assets/images/smk.png"
@@ -159,8 +159,8 @@ function HeaderTeacher() {
             </div>
           </div>
         </header>
-        <nav className="bg-white shadow-sm mt-2">
-          <div className="mx-auto flex space-x-4 py-2 px-10">
+        <nav className="bg-white shadow-sm shadow-lg border-b border-gray-200">
+          <div className="mx-auto flex space-x-4 py-2 px-25 mt-2 mb-2">
             <Link
               to="/teacher/*"
               // className="text-gray-600 px-4 py-2 hover:shadow-lg hover:bg-blue-500 hover:text-white hover:rounded-lg"

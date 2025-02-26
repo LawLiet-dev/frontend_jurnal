@@ -58,7 +58,7 @@ const Journal = () => {
       <div className="bg-white text-gray-800 lg:px-20">
         <div className="container mx-auto p-4">
           <div className="flex justify-between items-center mb-7 mt-3">
-            <h1 className="text-2xl font-bold lg:ml-4">
+            <h1 className="text-2xl font-bold lg:ml-4 px-4">
               Jurnal Harian Siswa
             </h1>
             <div className="text-gray-600">
@@ -120,7 +120,7 @@ const Journal = () => {
               </div>
 
               {/* Pagination */}
-              <div className="flex justify-between items-center mt-6 px-4">
+              {/* <div className="flex justify-between items-center mt-6 px-4">
                 <button
                   onClick={() => paginate(currentPage - 1)}
                   disabled={currentPage === 1}
@@ -150,7 +150,7 @@ const Journal = () => {
                 >
                   Next
                 </button>
-              </div>
+              </div> */}
 
               {/* <div className="text-center mt-4 text-sm text-gray-500">
                 Menampilkan {indexOfFirstItem + 1} - {Math.min(indexOfLastItem, journals.length)} dari {journals.length} data
