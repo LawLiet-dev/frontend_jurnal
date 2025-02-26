@@ -12,7 +12,7 @@ import Jurnal from './student/Jurnal'
 import Journal from './teacher/Journal'
 import List from './student/List'
 import Custom404 from './errors/404'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate  } from "react-router-dom";
 import { useAuthStore } from './store/auth';
 import ProtectedRoute from './components/ProtectedRoute';
 import AccessDenied from './errors/403';
@@ -45,6 +45,13 @@ function App() {
                     <Route path="/student/*" element={<Student />} />
                     <Route path="/jurnal/*" element={<Jurnal />} />
                 </Route>
+
+                <Route path="/teacher/*" element={<Navigate to="/teacher" replace />} />
+                <Route path="/siswa/*" element={<Navigate to="/siswa" replace />} />
+                <Route path="/journal/*" element={<Navigate to="/journal" replace />} />
+                <Route path="/student/*" element={<Navigate to="/student" replace />} />
+                <Route path="/jurnal/*" element={<Navigate to="/jurnal" replace />} />
+
             </Routes>
         </Router>
     {/* // </BrowserRouter> */}
