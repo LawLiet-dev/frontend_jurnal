@@ -35,15 +35,15 @@ function App() {
                 <Route path="*" element={<Custom404 />} />
                 
                 {/* Protected routes */}
-                    <Route path="/student/*" element={<Student />} />
-                    <Route path="/jurnal/*" element={<Jurnal />} />
+                <Route element={<ProtectedRoute allowedRoles={['teacher']} />}>
                     <Route path="/teacher/*" element={<Teacher />} />
                     <Route path="/siswa/*" element={<Siswa />} />
                     <Route path="/journal/*" element={<Journal />} />
-                <Route element={<ProtectedRoute allowedRoles={['teacher']} />}>
                 </Route>
                 
                 <Route element={<ProtectedRoute allowedRoles={['student']} />}>
+                    <Route path="/student/*" element={<Student />} />
+                    <Route path="/jurnal/*" element={<Jurnal />} />
                 </Route>
             </Routes>
         </Router>
