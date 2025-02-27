@@ -6,6 +6,7 @@ import { Toaster } from 'react-hot-toast';
 import Cookies from 'js-cookie';
 import HeaderSiswa from "../components/HeaderSiswa";
 import Api from "../services/api";
+import Notification from '../components/Notification';
 
 const Jurnal = () => {
   // States for form
@@ -22,6 +23,7 @@ const Jurnal = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [tableLoading, setTableLoading] = useState(false);
   const [formSubmitting, setFormSubmitting] = useState(false);
+  const [apiError, setApiError] = useState("");
   const [nameStatus, setNameStatus] = useState({
       studentsName: ''
     });
@@ -69,10 +71,11 @@ const Jurnal = () => {
         if (status === 400 || data.status === false) {
             // Handle the specific update restriction message
             if (data.message?.includes('Update jurnal hanya dapat dilakukan')) {
-            toast.error(data.message);
-            resetForm();
-            fetchJournals(currentPage); // Refresh the journal list
-            return;
+              setApiError(data.message);
+              toast.error(data.message);
+              resetForm();
+              fetchJournals(currentPage); 
+              return;
             }
             
             // Handle other error messages
@@ -92,6 +95,14 @@ const Jurnal = () => {
         
         // Case 4: Network or unexpected errors
         toast.error("Terjadi kesalahan pada server!");
+    };
+
+    const handleDateChange = (e) => {
+      if (isEditing) {
+        toast.error("Anda tidak bisa merubah tanggal");
+        return;
+      }
+      setDate(e.target.value);
     };
 
   // Fetch journals
@@ -125,9 +136,9 @@ const Jurnal = () => {
         let response;
         if (isEditing) {
           response = await Api.put(`/api/journal/${editingId}`, {
+            date,
             name,
-            description,
-            date 
+            description
           });
         } else {
           response = await Api.post('/api/journal', {
@@ -234,11 +245,12 @@ const Jurnal = () => {
   return (
     <div>
       <HeaderSiswa />
+      {/* <Notification /> */}
       <div className="bg-white p-4 lg:!px-24 lg:!py-4">
         <div className="px-1">
           <div className="flex flex-col lg:flex-row">
             {/* Form Section */}
-            <div className="lg:!w-[500px] bg-white p-6 rounded-lg shadow-md mb-6 lg:mb-0 w-full">
+            <div className="lg:!w-[500px] bg-white p-6 rounded-lg shadow-md mb-6 lg:mb-0 w-full overflow-hidden">
             {/* style={{ width:"500px" }} */}
               {/* <h1 className="text-gray-600 font-bold" style={{ marginBottom: "10px", fontSize: "24px", fontWeight: "700" }}>
                 Pengisian Jurnal {nameStatus.studentsName}
@@ -260,9 +272,11 @@ const Jurnal = () => {
                         id="tanggal" 
                         type="date"
                         value={date}
-                        onChange={(e) => setDate(e.target.value)}
+                        // onChange={(e) => setDate(e.target.value)}
+                        onChange={handleDateChange}
                         required
-                        disabled={isEditing}
+                        // readOnly={isEditing}
+                        // disabled={isEditing}
                         />
                         {errors.date && (
                         <p className="text-red-500 text-sm mt-1">
@@ -341,7 +355,7 @@ const Jurnal = () => {
             </div>
 
             {/* Table Section */}
-            <div className="w-full bg-white p-6 rounded-lg shadow-md md:ml-9 md:h-[448px] overflow-x-auto">
+            <div className="w-full bg-white p-6 rounded-lg shadow-md md:h-[448px] overflow-x-auto">
                 {tableLoading ? (
                     // <div className="text-center py-4">Loading...</div>
                     <div className="flex flex-col justify-center items-center h-30">
@@ -389,11 +403,11 @@ const Jurnal = () => {
                               year: 'numeric'
                             })}
                           </td>
-                          <td className="py-2 px-4 flex flex-col md:flex-row md:space-y-0">
+                          {/* <td className="py-2 px-4 flex flex-col md:flex-row md:space-y-0 space-x-2">
                             <button 
                               onClick={() => handleEdit(journal)}
                               className="px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 mx-auto md:px-4"
-                              style={{ marginRight:"10px" }}
+                              // style={{ marginRight:"10px" }}
                             >
                               Edit
                             </button>
@@ -403,7 +417,24 @@ const Jurnal = () => {
                             >
                               Delete
                             </button>
-                          </td>
+                          </td> */}
+                          <td className="py-2 px-4">
+                              <div className="flex flex-col md:flex-row space-x-2 gap-2">
+                                <button 
+                                  onClick={() => handleEdit(journal)}
+                                  className="px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
+                                  // style={{ marginRight`:"10px" }}
+                                >
+                                  Edit
+                                </button>
+                                <button 
+                                  onClick={() => confirmDelete(journal.id)}
+                                  className="px-2 py-1 rounded bg-red-500 text-white hover:bg-red-600"
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            </td>
                         </tr>
                       ))}
                     </tbody>
@@ -411,11 +442,11 @@ const Jurnal = () => {
                   
                   {/* Pagination */}
                   {totalPages > 1 && (
-                    <div className="flex justify-center mt-4 space-x-2">
+                    <div className="flex justify-between mt-22">
                       <button
                         onClick={() => fetchJournals(currentPage - 1)}
                         disabled={currentPage === 1}
-                        className={`px-3 py-1 rounded ${
+                        className={`px-4 py-2 rounded-lg text-sm font-medium ${
                           currentPage === 1 
                             ? 'bg-gray-200 text-gray-500 cursor-not-allowed' 
                             : 'bg-blue-500 text-white hover:bg-blue-600'
@@ -424,11 +455,11 @@ const Jurnal = () => {
                         Previous
                       </button>
                       
-                      {[...Array(totalPages)].map((_, index) => (
+                      {/* {[...Array(totalPages)].map((_, index) => (
                         <button
                           key={index + 1}
                           onClick={() => fetchJournals(index + 1)}
-                          className={`px-3 py-1 rounded ${
+                          className={`px-4 py-2 rounded-lg text-sm font-medium ${
                             currentPage === index + 1
                               ? 'bg-blue-500 text-white'
                               : 'bg-gray-200 hover:bg-gray-300'
@@ -436,12 +467,12 @@ const Jurnal = () => {
                         >
                           {index + 1}
                         </button>
-                      ))}
+                      ))} */}
                       
                       <button
                         onClick={() => fetchJournals(currentPage + 1)}
                         disabled={currentPage === totalPages}
-                        className={`px-3 py-1 rounded ${
+                        className={`px-4 py-2 rounded-lg text-sm font-medium ${
                           currentPage === totalPages
                             ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
                             : 'bg-blue-500 text-white hover:bg-blue-600'

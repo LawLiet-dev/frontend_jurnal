@@ -8,7 +8,7 @@ import "../../public/assets/css/teacher.css";
 function About() {
   return (
     <div className="overflow-hidden">
-      <div className="block md:hidden">
+      <div className="hidden lg:block">
         <CursorFollower />
       </div>
       <HeaderLanding backgroundColor="#fff" />
@@ -17,49 +17,53 @@ function About() {
         <div className=" hero-with-shapes">
           <div className="container">
             <div className="mb-5">
-              <h1 className="md:text-5xl text-3xl text-black font-medium my-5">
-                Menciptakan
-                tamatan
-                yang
-                unggul
-                dan
-                <div className="hidden md:block">
-                  <span className="relative after:bg-amber-200 md:after:h-6 after:h-4 after:w-68 after:inset-x-0 after:bottom-0 after:absolute after:-z-10 block whitespace-pre-line mt-3">
-                    {" "}
-                    berprestasi
+              <div className="hidden lg:block">
+                <h1 className="md:text-5xl text-3xl text-black font-medium my-5">
+                  Menciptakan
+                  tamatan
+                  yang
+                  unggul
+                  dan
+                  <div className="hidden md:block">
+                    <span className="relative after:bg-amber-200 md:after:h-6 after:h-4 after:w-68 after:inset-x-0 after:bottom-0 after:absolute after:-z-10 block whitespace-pre-line mt-3">
+                      {" "}
+                      berprestasi
+                      melalui
+                      program
+                      pkl
+                    </span>
+                  </div>
+                  <div className="md:hidden">
+                    <span className="relative after:bg-amber-200 md:after:h-6 after:h-4 after:w-43 after:inset-x-0 after:bottom-0 after:absolute after:-z-10 block whitespace-pre-line mt-3">
+                      {" "}
+                      berprestasi
+                    </span>{" "}
                     melalui
-                    program
+                    program{" "}
+                    <span className="block whitespace-pre-line"></span>
                     pkl
+                  </div>
+                </h1>
+              </div>
+              <div className="block lg:hidden">
+                <h1 className="md:text-5xl text-3xl text-black font-medium">Menciptakan <span className="block">tamatan yang</span> unggul dan {""}
+                  <span className="block">
+                    <span className="relative after:bg-amber-200 md:after:h-6 after:h-4 after:w-43 after:inset-x-0 after:bottom-0 after:absolute after:-z-10 mt-3">berprestasi</span>
                   </span>
-                </div>
-                <div className="md:hidden">
-                  <span className="relative after:bg-amber-200 md:after:h-6 after:h-4 after:w-43 after:inset-x-0 after:bottom-0 after:absolute after:-z-10 block whitespace-pre-line mt-3">
-                    {" "}
-                    berprestasi
-                  </span>{" "}
-                  melalui
-                  program{" "}
-                  <span className="block whitespace-pre-line"></span>
-                  pkl
-                </div>
-              </h1>
-              <p className="w-3/4 text-lg font-medium mt-6 mb-20 text-default-600">
-                Kami
-                membantu
-                berkontribusi
-                untuk
-                masa
-                depan
-                bangsa
-                melalui
-                pendidikan
-                dan
-                memberikan
-                pengalaman
-                kerja
-                yang
-                terbaik.
-              </p>
+                  {""} melalui <span className="block"> program pkl</span>
+                </h1>
+              </div>
+
+              <div className="hidden lg:block">
+                <p className="w-3/4 text-lg font-medium mt-6 mb-20 text-default-600">
+                  Kami membantu berkontribusi untuk masa depan bangsa melalui pendidikan dan memberikan pengalaman kerja yang terbaik.
+                </p>
+              </div>
+              <div className="block lg:hidden">
+                <p className="w-3/4 text-lg font-medium mt-6 mb-20 text-default-600 text-justify hyphens-auto leading-relaxed">
+                  Kami membantu berkontribusi untuk masa depan bangsa melalui pendidikan dan memberikan pengalaman kerja yang terbaik.
+                </p>
+              </div>
               {/* data-aos="fade-right" data-aos-duration="1000" */}
               <div className="flex space-x-4">
                 <a

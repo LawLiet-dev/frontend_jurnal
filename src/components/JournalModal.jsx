@@ -3,14 +3,37 @@ import { ArrowLeft, X } from 'lucide-react';
 
 const JournalModal = ({ isOpen, onClose, journalData, studentData }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const [isMobile, setIsMobile] = useState(false);
+  const itemsPerPage = isMobile ? 2 : 5;
   const modalRef = useRef();
+
+  useEffect(() => {
+      // Check if window is available (client-side)
+      if (typeof window !== 'undefined') {
+        // Initial check
+        setIsMobile(window.innerWidth < 768);
+  
+        // Add resize listener
+        const handleResize = () => {
+          setIsMobile(window.innerWidth < 768);
+        };
+  
+        window.addEventListener('resize', handleResize);
+  
+        // Cleanup
+        return () => window.removeEventListener('resize', handleResize);
+      }
+    }, []);
 
   useEffect(() => {
     if (isOpen) {
       setCurrentPage(1);
     }
   }, [isOpen]);
+
+  useEffect(() => {
+      setCurrentPage(1);
+    }, [isMobile]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {

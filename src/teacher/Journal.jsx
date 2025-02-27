@@ -7,6 +7,7 @@ const Journal = () => {
   const [journals, setJournals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [lastUpdated, setLastUpdated] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
@@ -29,6 +30,7 @@ const Journal = () => {
         .filter(journal => journal.date === today);
       
       setJournals(transformedData);
+      setLastUpdated(new Date());
       setIsLoading(false);
     } catch (error) {
       setError('Terjadi kesalahan saat mengambil data jurnal.');
@@ -39,6 +41,15 @@ const Journal = () => {
 
   useEffect(() => {
     fetchJournals();
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      fetchJournals();
+    }, 30000); // 30 seconds
+  
+    // Clean up interval on component unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   // Get current items
@@ -61,13 +72,20 @@ const Journal = () => {
             <h1 className="text-2xl font-bold lg:ml-4 px-4">
               Jurnal Harian Siswa
             </h1>
-            <div className="text-gray-600">
-              {new Date().toLocaleDateString('id-ID', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
+            <div className="flex flex-col items-end">
+              <div className="text-gray-600">
+                {new Date().toLocaleDateString('id-ID', {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </div>
+              {lastUpdated && (
+                <div className="text-xs text-gray-500 mt-1">
+                  Terakhir diperbarui: {lastUpdated.toLocaleTimeString('id-ID')}
+                </div>
+              )}
             </div>
           </div>
 

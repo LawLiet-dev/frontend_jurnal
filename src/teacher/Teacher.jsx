@@ -11,10 +11,10 @@ function Teacher() {
   const [isUnsubmittedModalOpen, setIsUnsubmittedModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [lastUpdated, setLastUpdated] = useState(null);
 
   // Fetch both student and journal data
   const fetchData = async () => {
-    setLoading(true);
     try {
       const token = Cookies.get("token");
       if (!token) {
@@ -37,6 +37,9 @@ function Teacher() {
       if (journalResponse.data.status) {
         setJournalData(journalResponse.data.data);
       }
+      
+      // Update last updated timestamp
+      setLastUpdated(new Date());
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -44,8 +47,19 @@ function Teacher() {
     }
   };
 
+  // Initial data load
   useEffect(() => {
     fetchData();
+  }, []);
+
+  // Set up polling for data updates every 30 seconds
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 30000); // 30 seconds
+
+    // Clean up interval on component unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   // Get unique dudi names
@@ -147,8 +161,13 @@ function Teacher() {
             }} 
             className="bg-white rounded-lg w-4/5 max-w-4xl"
             >
-              <div className="bg-blue-500 text-white p-4 rounded-t-lg text-lg">
-                Statistik Jurnal
+              <div className="bg-blue-500 text-white p-4 rounded-t-lg text-lg flex justify-between items-center">
+                <span>Statistik Jurnal</span>
+                {lastUpdated && (
+                  <span className="text-xs opacity-80">
+                    Terakhir diperbarui: {lastUpdated.toLocaleTimeString()}
+                  </span>
+                )}
               </div>
               <div className="p-6">
                 {loading ? (
@@ -215,9 +234,6 @@ function Teacher() {
                             <div className="font-bold">{student.data.name}</div>
                             <div className="text-gray-600">Journals: {stats.journalsPerStudent[student.data.name] || 0}</div>
                           </div>
-                          {/* <button className="bg-blue-500 text-white py-2 px-4 rounded-lg flex items-center">
-                            Detail <i className="fas fa-chevron-right ml-2"></i>
-                          </button> */}
                         </div>
                       ))}
                     </div>
@@ -264,9 +280,6 @@ function Teacher() {
           </div>
 
           {/* Statistics Section */}
-          {/* <div 
-            className="bg-white rounded-lg w-full md:w-4/5 max-w-4xl border-4 border-blue-500"
-          > */}
           <div 
             style={{
               borderRight: "7px solid #3B82F6", 
@@ -276,8 +289,13 @@ function Teacher() {
             }} 
             className="bg-white rounded-lg w-4/5 max-w-4xl w-full "
             >
-            <div className="bg-blue-500 text-white p-4 rounded-t-lg text-lg">
-              Statistik Jurnal
+            <div className="bg-blue-500 text-white p-4 rounded-t-lg text-lg flex justify-between items-center">
+              <span>Statistik Jurnal</span>
+              {lastUpdated && (
+                <span className="text-xs opacity-80">
+                  Terakhir diperbarui: {lastUpdated.toLocaleTimeString()}
+                </span>
+              )}
             </div>
             <div className="p-6">
               {loading ? (

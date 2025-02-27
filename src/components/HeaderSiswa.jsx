@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import Api from "../services/api"
 import { saveAs } from 'file-saver';
 import { useAuthStore } from "../store/auth";
+import { Toaster, toast } from "react-hot-toast";
 
 function HeaderSiswa() {
   const location = useLocation();
@@ -30,6 +31,9 @@ function HeaderSiswa() {
   const [selectedTeacher, setSelectedTeacher] = useState(null);
   const [errors, setErrors] = useState({});
 
+  // Add loading state
+  const [isProcessing, setIsProcessing] = useState(false);
+
   // Refs
   const sidebarRef = useRef(null);
   const hamburgerRef = useRef(null);
@@ -38,6 +42,9 @@ function HeaderSiswa() {
   const mobileDropdownRef = useRef(null);
   const mobileProfileButtonRef = useRef(null);
   const modalRef = useRef(null);
+
+  // Toast configuration - Setting longer duration (30 seconds = 30000ms)
+  const TOAST_DURATION = 10000;
 
   // Event Handlers
   const handleDesktopProfileClick = () => {
@@ -136,15 +143,20 @@ function HeaderSiswa() {
   // Handle settings update
   const handleSaveSettings = async () => {
     try {
+      // Set processing state to true
+      setIsProcessing(true);
+      
       const token = Cookies.get("token");
       if (!token) {
         setErrors({ auth: "No token found" });
+        setIsProcessing(false);
         return;
       }
 
       const studentId = studentData.student?.id;
       if (!studentId) {
         setErrors({ student: "Student ID not found" });
+        setIsProcessing(false);
         return;
       }
 
@@ -158,10 +170,24 @@ function HeaderSiswa() {
       if (response.data.status) {
         setIsSettingsModalOpen(false);
         fetchSettings();
+        // Using longer duration for toast notification
+        toast.success("Permintaan anda berhasil di kirim mohon tunggu konfirmasi dari admin", {
+          duration: TOAST_DURATION,
+        });
       }
+      
+      // Set processing state back to false after completion
+      setIsProcessing(false);
     } catch (error) {
       console.error("Error saving settings:", error);
       setErrors(error.response?.data?.errors || { api: "Failed to save settings" });
+      // Using longer duration for error toast notification
+      toast.error("Gagal menyimpan pengaturan. Silakan coba lagi.", {
+        duration: TOAST_DURATION,
+      });
+      
+      // Set processing state back to false after error
+      setIsProcessing(false);
     }
   };
 
@@ -177,7 +203,9 @@ function HeaderSiswa() {
     try {
       const token = Cookies.get("token");
       if (!token) {
-        alert("Please log in to export PDF");
+        toast.error("Silakan login untuk mengekspor PDF", {
+          duration: TOAST_DURATION,
+        });
         return;
       }
 
@@ -204,9 +232,17 @@ function HeaderSiswa() {
       
       // Trigger download
       saveAs(pdfBlob, fileName);
+      
+      // Show success message
+      toast.success("PDF berhasil didownload", {
+        duration: TOAST_DURATION,
+      });
 
     } catch (error) {
-      console.error("Error exporting PDF:", error);
+      // console.error("Error exporting PDF:", error);
+      toast.error("Gagal mengekspor PDF. Silakan coba lagi.", {
+        duration: TOAST_DURATION,
+      });
     }
   };
 
@@ -230,6 +266,9 @@ function HeaderSiswa() {
   const handleSettingsClick = () => {
     if (!studentData.student?.id) {
       setErrors({ student: "Student data not loaded" });
+      toast.error("Data siswa belum dimuat", {
+        duration: TOAST_DURATION,
+      });
       return;
     }
     setIsSettingsModalOpen(true);
@@ -243,11 +282,44 @@ function HeaderSiswa() {
   const logoutHandler = () => {
     logout();
     navigate('/');
+    toast.success("Berhasil logout", {
+      duration: TOAST_DURATION,
+    });
   };
 
   return (
     <div className="bg-white">
       {/* Header untuk Desktop */}
+      <Toaster 
+        position="top-right" 
+        toastOptions={{
+          // Default options for all toasts
+          duration: TOAST_DURATION,
+          // style: {
+          //   background: '#fff',
+          //   color: '#363636',
+          //   padding: '16px',
+          //   borderRadius: '8px',
+          //   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+          // },
+          // Custom styles for success toasts
+          success: {
+            duration: TOAST_DURATION,
+            // style: {
+            //   background: '#EBF8F2',
+            //   // border: '1px solid #38A169',
+            // },
+          },
+          // Custom styles for error toasts
+          error: {
+            duration: TOAST_DURATION,
+            // style: {
+            //   background: '#FFF5F5',
+            //   // border: '1px solid #E53E3E',
+            // },
+          },
+        }}
+      />
       <div className="hidden md:block">
         <header className="bg-white shadow-lg border-b border-gray-200 relative z-10">
           <div className="mx-auto flex justify-between items-center py-2 md:px-20">
@@ -291,35 +363,35 @@ function HeaderSiswa() {
                         <h5 className="text-xl font-semibold text-gray-800">User Profile</h5>
                       </div>
                       <div className="flex items-center pb-4 border-b border-gray-200">
-  		       <img 
-    			src="/assets/images/profile/user-7.jpg" 
-    			className="rounded-full w-16 h-16 border-2 border-gray-200 object-cover"
-    			alt="Profile"
-  		      />
-  		      <div className="ml-4 overflow-hidden">
-    			<div className="group relative">
-      			  <h5 className="text-lg font-semibold text-gray-800 truncate max-w-[200px]">
-        			{user?.name || 'User'}
-      			  </h5>
-      		        <div className="hidden group-hover:block absolute z-10 bg-white shadow-lg rounded-md p-2 text-sm text-gray-800 whitespace-normal max-w-xs">
-        			{user?.name || 'User'}
-      			</div>
-    		      </div>
-    			<span className="block text-gray-600 text-sm mb-1 truncate max-w-[200px]">
-      				{studentData.student?.nisn || '-'}
-    			</span>
-    		     <div className="group relative">
-      			<div className="flex items-center text-gray-600 text-sm truncate max-w-[200px]">
-        		  <Mail className="flex-shrink-0 w-4 h-4 mr-2" />
-        			{user?.email || 'email@example.com'}
-      			</div>
-      			  <div className="hidden group-hover:block absolute z-10 bg-white shadow-lg rounded-md p-2 text-sm text-gray-800 whitespace-normal max-w-xs">
-        			{user?.email || 'email@example.com'}
-      			  </div>
-    			</div>
-  		      </div>
-		   </div>                      
-		      <div className="pt-4 space-y-2">
+                        <img 
+                      src="/assets/images/profile/user-7.jpg" 
+                      className="rounded-full w-16 h-16 border-2 border-gray-200 object-cover"
+                      alt="Profile"
+                        />
+                        <div className="ml-4 overflow-hidden">
+                      <div className="group relative">
+                          <h5 className="text-lg font-semibold text-gray-800 truncate max-w-[200px]">
+                          {user?.name || 'User'}
+                          </h5>
+                              <div className="hidden group-hover:block absolute z-10 bg-white shadow-lg rounded-md p-2 text-sm text-gray-800 whitespace-normal max-w-xs">
+                          {user?.name || 'User'}
+                        </div>
+                          </div>
+                      <span className="block text-gray-600 text-sm mb-1 truncate max-w-[200px]">
+                          {studentData.student?.nisn || '-'}
+                      </span>
+                        <div className="group relative">
+                        <div className="flex items-center text-gray-600 text-sm truncate max-w-[200px]">
+                          <Mail className="flex-shrink-0 w-4 h-4 mr-2" />
+                          {user?.email || 'email@example.com'}
+                        </div>
+                          <div className="hidden group-hover:block absolute z-10 bg-white shadow-lg rounded-md p-2 text-sm text-gray-800 whitespace-normal max-w-xs">
+                          {user?.email || 'email@example.com'}
+                          </div>
+                      </div>
+                        </div>
+                  </div>                      
+                      <div className="pt-4 space-y-2">
                         <button 
                           className="w-full bg-primary hover:bg-primary text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium"
                           onClick={handleSettingsClick}
@@ -443,9 +515,9 @@ function HeaderSiswa() {
               <button
                 onClick={handleSaveSettings}
                 className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
-                disabled={!selectedDudi || !selectedTeacher}
+                disabled={!selectedDudi || !selectedTeacher || isProcessing}
               >
-                Simpan Pilihan
+                {isProcessing ? "Memproses..." : "Simpan Pilihan"}
               </button>
             </div>
           </div>

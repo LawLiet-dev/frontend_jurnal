@@ -44,11 +44,17 @@ function HeaderLanding({ backgroundColor }) {
     
     // Dynamic navbar height based on scroll position and screen size
     const getNavbarWidth = () => {
-        if (windowWidth < 768) {
+        if (windowWidth <= 320) {
+            return scrollPosition > 50 ? "320px" : "320px";
+        } 
+        else if (windowWidth <= 375) {
             return scrollPosition > 50 ? "380px" : "380px";
-        }
+        } 
+        // else if (windowWidth <= 768) {
+        //     return scrollPosition > 50 ? "450px" : "450px";
+        // }
         return "auto";
-    };
+    };    
 
     return (
         <div className="overflow-hidden w-full">
@@ -92,7 +98,7 @@ function HeaderLanding({ backgroundColor }) {
                                 className="bg-primary text-white px-4 py-2 rounded inline-flex items-center text-sm">Login</Link>
                         </div>
 
-                        <div className="lg:hidden flex items-center ms-auto px-2.5">
+                        <div className="lg:hidden flex items-center ms-auto px-2.6">
                             <button 
                                 type="button" 
                                 className="py-3 px-4 inline-flex items-center"
@@ -191,4 +197,4 @@ function HeaderLanding({ backgroundColor }) {
     )
 }
 
-export default HeaderLanding
+export default HeaderLanding;

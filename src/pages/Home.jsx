@@ -34,44 +34,66 @@ function Home() {
                   </div>
                 </Link>
               </div>
+              <div className="hidden lg:block">
+                <h1 className="md:text-5xl text-3xl text-default-700 font-medium my-5">
+                  Maju
+                  bersama
+                  kami
+                  SMKN
+                  1
+                  <span className="relative after:bg-[#C9DCE0] md:after:h-6 after:h-4 after:w-full after:inset-x-0 after:bottom-0 after:absolute after:-z-10">
+                    {" "}
+                    KRAKSAAN
+                  </span>
+                </h1>
+              </div>
+              <div className="block lg:hidden">
               <h1 className="md:text-5xl text-3xl text-default-700 font-medium my-5">
-                Maju
-                bersama
-                kami
-                SMKN
-                1
-                <span className="relative after:bg-amber-200 md:after:h-6 after:h-4 after:w-full after:inset-x-0 after:bottom-0 after:absolute after:-z-10">
-                  {" "}
-                  KRAKSAAN
-                </span>
-              </h1>
+                  Maju
+                  bersama
+                  kami
+                  SMKN
+                  1
+                  <span className="relative after:bg-[#C9DCE0] md:after:h-6 after:h-4 after:w-full after:inset-x-0 after:bottom-0 after:absolute after:-z-10">
+                    {" "}
+                    KRAKSAAN
+                  </span>
+                </h1>
+              </div>
               {/* <p className="w-3/4 text-lg font-medium mt-6 mb-20 text-default-600">Were a top-notch web design and
                         development team helping business to craft the meaningful and interactive product experiences.
                     </p> */}
-              <p className="w-3/4 text-lg font-medium mt-6 mb-20 text-default-600">
-                Praktek
-                Kerja
-                Lapangan
-                bukan
-                sekadar
-                pelatihan,
-                tetapi
-                langkah
-                nyata
-                siswa
-                SMKN
-                1
-                Kraksaan
-                untuk
-                merasakan
-                dunia
-                industri
-                dan
-                mengasah
-                keterampilan
-                digital
-                mereka.
-              </p>
+              <div className="hidden lg:block">
+                <p className="w-3/4 text-lg font-medium mt-6 mb-20 text-default-600">
+                  Praktek
+                  Kerja
+                  Lapangan
+                  bukan
+                  sekadar
+                  pelatihan,
+                  tetapi
+                  langkah
+                  nyata
+                  siswa
+                  SMKN
+                  1
+                  Kraksaan
+                  untuk
+                  merasakan
+                  dunia
+                  industri
+                  dan
+                  mengasah
+                  keterampilan
+                  digital
+                  mereka.
+                </p>
+              </div>
+              <div className="block lg:hidden">
+                  <p className="w-3/4 text-lg font-medium mt-6 mb-20 text-default-600 text-justify hyphens-auto leading-relaxed">
+                      Praktek Kerja Lapangan bukan sekadar pelatihan, tetapi langkah nyata siswa SMKN 1 Kraksaan untuk merasakan dunia industri dan mengasah keterampilan digital mereka.
+                  </p>
+              </div>
               <div className="flex flex-wrap items-center gap-5">
                 <Link
                   to="/register"
