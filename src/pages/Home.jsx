@@ -426,8 +426,12 @@ function Home() {
               src="assets/images/brands/Logo_BRI.png"
               className="w-28"
             />
-            <img
+            {/* <img
               src="assets/images/brands/J&T.svg"
+              className="w-28"
+            /> */}
+            <img
+              src="assets/images/brands/HUMMATECH.png"
               className="w-28"
             />
           </div>
